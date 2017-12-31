@@ -1,4 +1,4 @@
-package com.hoteach.concurrencyproviderandconsumer;
+package com.hoteach.concurrency.providerandconsumer;
 
 import java.util.concurrent.*;
 
