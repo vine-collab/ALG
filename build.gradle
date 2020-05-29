@@ -12,3 +12,7 @@ allprojects {
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
     }
 }
+dependencies {
+    compile 'org.projectlombok:lombok:1.18.0'
+    compile 'com.alibaba:fastjson:1.2.8'
+}
