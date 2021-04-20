@@ -15,4 +15,5 @@ allprojects {
 dependencies {
     compile 'org.projectlombok:lombok:1.18.0'
     compile 'com.alibaba:fastjson:1.2.8'
+    compile 'org.apache.commons:commons-lang3:3.9'
 }
