@@ -1,5 +1,6 @@
 .gradle/
 .idea/
+gradle/wrapper/
 
 .idea
 *.iml
@@ -34,3 +35,5 @@ npm-debug.log
 .tmp
 .myeclipse/
 velocity.log.1
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
