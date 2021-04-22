@@ -1,12 +1,8 @@
 package com.hoteach.naive;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
-import static java.util.concurrent.Executors.newFixedThreadPool;
 
 /**
  * 多个读者多个写这一个缓冲区
