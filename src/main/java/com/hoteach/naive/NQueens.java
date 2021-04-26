@@ -100,6 +100,10 @@ public class NQueens {
         for (int j = 0; j < 4; j++) {
             boards.add(new ArrayList<>(row));
         }
+
+        ArrayList<String> strings = new ArrayList<>(row);
+
+
         nQueens.nQueue(0, boards);
         System.out.println(JSON.toJSONString(result, SerializerFeature.DisableCircularReferenceDetect));
 
