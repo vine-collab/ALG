@@ -1,9 +1,8 @@
 package com.hoteach.naive;
 
-import com.alibaba.fastjson.JSON;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -47,14 +46,54 @@ public class SlidingWindow {
                 }
             }
         }
-        return len == Integer.MAX_VALUE ? null : source.substring(start, len);
+        return len == Integer.MAX_VALUE ? null : source.substring(start, len + 1);
 
 
     }
 
+
+    public String minStr(String s, String t) {
+        Map<Character, Integer> window = new HashMap<>();
+        Map<Character, Integer> need = new HashMap<>();
+        for (int i = 0; i < t.toCharArray().length; i++) {
+            char c = t.charAt(i);
+            need.put(c, need.getOrDefault(c, 0) + 1);
+        }
+        int start = 0, left = 0, right = 0, valid = 0, len = Integer.MAX_VALUE;
+        while (right < s.length()) {
+            char c = s.charAt(right);
+            right++;
+            if (need.containsKey(c)) {
+                window.put(c, window.getOrDefault(c, 0) + 1);
+                if (Objects.equals(need.get(c), window.get(c))) {
+                    valid++;
+                }
+            }
+            while (valid == need.size()) {
+                if (right - left < len) {
+                    start = left;
+                    len = right - left;
+                }
+                char l = s.charAt(left);
+                left++;
+                if (need.containsKey(l)) {
+                    if (Objects.equals(window.get(l), need.get(l))) {
+                        valid--;
+                    }
+                    window.put(l, window.get(l) - 1);
+                }
+            }
+
+        }
+
+
+        return len == Integer.MAX_VALUE ? null : s.substring(start, len + 1);
+    }
+
+
     public static void main(String[] args) {
         SlidingWindow slidingWindow = new SlidingWindow();
-        String s = slidingWindow.minWindow("abcdcc", "bac");
+        String s = slidingWindow.minWindow("bxacdcc", "bac");
         System.out.println(s);
     }
 
