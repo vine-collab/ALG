@@ -17,4 +17,6 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.8'
     compile 'org.apache.commons:commons-lang3:3.9'
     compile 'com.google.guava:guava:30.1.1-jre'
+    implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+
 }
