@@ -124,6 +124,61 @@ public class NSum {
     }
 
 
+    public List<List<Integer>> nSums(int[] nums, int n, int start, Integer target) {
+        List<List<Integer>> result = new ArrayList<>();
+        int length = nums.length;
+        if (n < 2 || length < n) {
+            return result;
+        }
+        if (n == 2) {
+            int leftPoint = start;
+            int rightPoint = nums.length - 1;
+            while (leftPoint < rightPoint) {
+                int left = nums[leftPoint];
+                int right = nums[rightPoint];
+                int sum = left + right;
+                if (target == sum) {
+                    result.add(Lists.newArrayList(left, right));
+                    while (leftPoint < rightPoint && nums[leftPoint] == left) {
+                        leftPoint++;
+                    }
+                    while (leftPoint < rightPoint && nums[rightPoint] == right) {
+                        rightPoint--;
+                    }
+                }
+                if (target < sum) {
+                    while (leftPoint < rightPoint && nums[rightPoint] == right) {
+                        rightPoint--;
+                    }
+                }
+
+                if (target > sum) {
+                    while (leftPoint < rightPoint && nums[leftPoint] == left) {
+                        leftPoint++;
+                    }
+                }
+            }
+
+        }
+
+        if (n > 2) {
+            for (int i = start; i < nums.length; i++) {
+                int first = nums[i];
+                List<List<Integer>> lists = nSums(nums, n - 1, i + 1, target - nums[i]);
+                if (CollectionUtils.isNotEmpty(lists)) {
+                    lists.forEach(list -> list.add(0, first));
+                    result.addAll(lists);
+                }
+                while (i < nums.length - 1 && nums[i] == nums[i + 1]) {
+                    i++;
+                }
+            }
+        }
+
+        return result;
+    }
+
+
     public static void main(String[] args) {
         NSum nSum = new NSum();
         int[] nums = {5, 3, 1, 6};
@@ -140,7 +195,11 @@ public class NSum {
         target = 3;
         List<List<Integer>> threeSums = nSum.threeSums(nums, target);
         System.out.println(JSON.toJSONString(threeSums));
-
+        System.out.println("-------------------");
+        nums = new int[]{1, 2, 3, 4, 4, -1, -1, 0};
+        Arrays.sort(nums);
+        List<List<Integer>> nSums = nSum.nSums(nums, 3, 0, 3);
+        System.out.println(JSON.toJSONString(nSums));
     }
 
 }
