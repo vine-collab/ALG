@@ -2,6 +2,7 @@ package com.hoteach.naive;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,6 +71,58 @@ public class NSum {
         return result;
     }
 
+    public List<List<Integer>> twoSums(int[] nums, int start, Integer target) {
+
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
+        int pointLeft = start;
+        int pointRight = nums.length - 1;
+
+        while (pointLeft < pointRight) {
+            int left = nums[pointLeft];
+            int right = nums[pointRight];
+            int sum = nums[pointLeft] + nums[pointRight];
+            if (sum == target) {
+                result.add(Lists.newArrayList(nums[pointLeft], nums[pointRight]));
+                while (pointLeft < pointRight && nums[pointLeft] == left) {
+                    pointLeft++;
+                }
+                while (pointLeft < pointRight && nums[pointRight] == right) {
+                    pointRight--;
+                }
+            }
+            if (sum > target) {
+                pointRight--;
+            }
+
+            if (sum < target) {
+                pointLeft++;
+            }
+        }
+        return result;
+    }
+
+    public List<List<Integer>> threeSums(int[] nums, Integer target) {
+
+        Arrays.sort(nums);
+        System.out.println(JSON.toJSONString(nums));
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int first = nums[i];
+            List<List<Integer>> lists = twoSums(nums, i + 1, target - nums[i]);
+            if (CollectionUtils.isNotEmpty(lists)) {
+                lists.forEach(list -> list.add(0, first));
+                result.addAll(lists);
+            }
+            while (i < nums.length - 1 && nums[i] == nums[i + 1]) {
+                i++;
+            }
+        }
+
+        return result;
+    }
+
 
     public static void main(String[] args) {
         NSum nSum = new NSum();
@@ -82,7 +135,11 @@ public class NSum {
         target = 16;
         List<List<Integer>> pairs = nSum.twoSums(nums, target);
         System.out.println(JSON.toJSONString(pairs));
-
+        System.out.println("-------------------");
+        nums = new int[]{1, 2, 3, 4, 4, -1, -1, 0};
+        target = 3;
+        List<List<Integer>> threeSums = nSum.threeSums(nums, target);
+        System.out.println(JSON.toJSONString(threeSums));
 
     }
 
