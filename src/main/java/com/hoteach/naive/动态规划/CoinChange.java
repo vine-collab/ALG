@@ -83,17 +83,34 @@ public class CoinChange {
         return result == Integer.MAX_VALUE ? -1 : result;
     }
 
+    public int coinChangeDP(List<Integer> coins, Integer money) {
+        Integer[] dp = new Integer[money + 1];
+        Arrays.fill(dp, money + 1);
+        dp[0] = 0;
+        for (int i = 0; i < dp.length; i++) {
+            for (Integer coin : coins) {
+                if (i - coin < 0) {
+                    continue;
+                }
+                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+            }
+        }
+        return dp[money] == money + 1 ? -1 : dp[money];
+
+    }
+
 
     public static void main(String[] args) {
         CoinChange coinChange = new CoinChange();
         long l = System.currentTimeMillis();
-        List<Integer> path = Lists.newArrayList();
         int i = coinChange.coinChange(Arrays.asList(1, 3, 6), 11);
         System.out.println(i);
         System.out.println("--------");
-        int i1 = coinChange.coinChangeMyself(Arrays.asList( 6), 11);
+        int i1 = coinChange.coinChangeMyself(Arrays.asList(6), 11);
         System.out.println(i1);
-        System.out.println(path);
+        System.out.println("--------");
+        int dp = coinChange.coinChangeDP(Arrays.asList(6), 11);
+        System.out.println(dp);
     }
 
 }
