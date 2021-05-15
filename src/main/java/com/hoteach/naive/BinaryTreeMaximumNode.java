@@ -1,11 +1,13 @@
 package com.hoteach.naive;
 
+import com.alibaba.fastjson.JSON;
+
 import java.util.Stack;
 
 /**
  * 查找二叉树的最大节点
  *
- * @author hekai
+ * @author 阿季
  * @create 2017-10-20 下午4:42
  */
 
@@ -34,6 +36,28 @@ public class BinaryTreeMaximumNode {
         return maxNode;
     }
 
+
+    /**
+     * 翻转二叉树
+     * @param root
+     * @return
+     */
+    TreeNode invertTree(TreeNode root) {
+        if(root == null) {
+            return null;
+        }
+
+        TreeNode leftChild = root.leftChild;
+        root.leftChild = root.rightChild;
+        root.rightChild = leftChild;
+
+        invertTree(root.leftChild);
+        invertTree(root.rightChild);
+
+        return root;
+    }
+
+
     public static void main(String[] args) {
         TreeNode rootNode = new TreeNode(1);
         TreeNode node1 = new TreeNode(-5);
@@ -57,6 +81,10 @@ public class BinaryTreeMaximumNode {
         BinaryTreeMaximumNode binaryTreeMaximumNode = new BinaryTreeMaximumNode();
         TreeNode treeNode = binaryTreeMaximumNode.maxNode(rootNode);
         System.out.println(treeNode.val);
+        System.out.println("---------------");
+        System.out.println(JSON.toJSONString(rootNode));
+        TreeNode treeNode1 = binaryTreeMaximumNode.invertTree(rootNode);
+        System.out.println(JSON.toJSONString(treeNode1));
 
     }
 }

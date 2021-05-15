@@ -1,9 +1,11 @@
-package com.hoteach.naive;
+package com.hoteach.naive.动态规划;
 
 import com.google.common.collect.Lists;
 
-import javax.sound.midi.Soundbank;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * 换零钱
@@ -42,36 +44,6 @@ public class CoinChange {
     }
 
 
-    public int coinChange(List<Integer> coins, Integer money, Map<Integer, Integer> cache, List<Integer> path) {
-
-
-        Integer integer = cache.get(money);
-        if (Objects.nonNull(integer)) {
-            return integer;
-        }
-
-        if (money == 0) return 0;
-        if (money < 0) return -1;
-
-        int temp = Integer.MAX_VALUE;
-
-        for (Integer coin : coins) {
-            int result = coinChange(coins, money - coin, cache, path);
-            if (result == -1) {
-                continue;
-            }
-            if (result + 1 < temp) {
-                path.add(coin);
-                temp = result + 1;
-            }
-        }
-
-        temp = temp == Integer.MAX_VALUE ? -1 : temp;
-        cache.put(money, temp);
-        return temp;
-    }
-
-
     public int coinChange(List<Integer> coins, Integer money) {
         Integer[] dp = new Integer[money + 1];
         Arrays.fill(dp, money + 1);
@@ -90,12 +62,37 @@ public class CoinChange {
     }
 
 
+    public int coinChangeMyself(List<Integer> coins, Integer money) {
+        if (money == 0) {
+            return 0;
+        }
+        if (money < 0) {
+            return -1;
+        }
+
+        int result = Integer.MAX_VALUE;
+        for (int i = 0; i < coins.size(); i++) {
+            int temp = coinChangeMyself(coins, money - coins.get(i));
+            // 过滤无解
+            if (temp == -1) {
+                continue;
+            }
+            result = Math.min(temp + 1, result);
+        }
+
+        return result == Integer.MAX_VALUE ? -1 : result;
+    }
+
+
     public static void main(String[] args) {
         CoinChange coinChange = new CoinChange();
         long l = System.currentTimeMillis();
         List<Integer> path = Lists.newArrayList();
-        int i = coinChange.coinChange(Arrays.asList(1, 3, 5, 6, 11), 11);
+        int i = coinChange.coinChange(Arrays.asList(1, 3, 6), 11);
         System.out.println(i);
+        System.out.println("--------");
+        int i1 = coinChange.coinChangeMyself(Arrays.asList( 6), 11);
+        System.out.println(i1);
         System.out.println(path);
     }
 
