@@ -1,5 +1,8 @@
 package com.hoteach.naive.动态规划;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 编辑距离
  *
@@ -10,25 +13,30 @@ package com.hoteach.naive.动态规划;
 public class 编辑距离 {
 
 
-    int miniDistance(String s, String t) {
+    Map<String, Integer> memory = new HashMap<>();
 
 
-        return dp(s, t, s.length() - 1, t.length() - 1);
-    }
+    int miniDistance(String s, String t, int pointS, int pointT) {
+        Integer integer = memory.get(pointS + "_" + pointT);
+        if(memory.get(pointS + "_" + pointT) != null) {
+            return integer;
+        }
 
-
-    int dp(String s, String t, int pointS, int pointT) {
         if (pointS == -1) return pointT + 1;
         if (pointT == -1) return pointS + 1;
 
 
         if (s.charAt(pointS) == t.charAt(pointT)) {
-            return dp(s, t, pointS - 1, pointT - 1);
+            int i = miniDistance(s, t, pointS - 1, pointT - 1);
+            memory.put(pointS + "_" + pointT, i);
+            return i;
         } else {
-            int insert = dp(s, t, pointS, pointT - 1) + 1;
-            int delete = dp(s, t, pointS - 1, pointT) + 1;
-            int replace = dp(s, t, pointS - 1, pointT - 1) + 1;
-            return Math.min(insert, Math.min(delete, replace));
+            int insert = miniDistance(s, t, pointS, pointT - 1) + 1;
+            int delete = miniDistance(s, t, pointS - 1, pointT) + 1;
+            int replace = miniDistance(s, t, pointS - 1, pointT - 1) + 1;
+            int min = Math.min(insert, Math.min(delete, replace));
+            memory.put(pointS + "_" + pointT, min);
+            return min;
 
         }
     }
@@ -36,7 +44,9 @@ public class 编辑距离 {
 
     public static void main(String[] args) {
         编辑距离 c = new 编辑距离();
-        int i = c.miniDistance("apple", "plplea");
+        String s = "apple";
+        String t = "peplee";
+        int i = c.miniDistance(s, t, s.length() - 1, t.length() - 1);
         System.out.println(i);
     }
 
