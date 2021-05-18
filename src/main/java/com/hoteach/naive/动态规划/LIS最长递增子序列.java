@@ -30,7 +30,7 @@ public class LIS最长递增子序列 {
 
     public static void main(String[] args) {
         LIS最长递增子序列 lis = new LIS最长递增子序列();
-        int[] ints = {4, 4, 2};
+        int[] ints = {1, 6, 3, 5, 4, 4, 2};
         int i = lis.lengthOfLIS(ints);
         System.out.println(i);
 
