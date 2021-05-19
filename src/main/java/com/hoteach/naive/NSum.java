@@ -158,7 +158,6 @@ public class NSum {
                     }
                 }
             }
-
         }
 
         if (n > 2) {
@@ -196,9 +195,9 @@ public class NSum {
         List<List<Integer>> threeSums = nSum.threeSums(nums, target);
         System.out.println(JSON.toJSONString(threeSums));
         System.out.println("-------------------");
-        nums = new int[]{1, 2, 3, 4, 4, -1, -1, 0};
+        nums = new int[]{-1, 0, 1, 2, -1, -4};
         Arrays.sort(nums);
-        List<List<Integer>> nSums = nSum.nSums(nums, 3, 0, 3);
+        List<List<Integer>> nSums = nSum.nSums(nums, 3, 0, 0);
         System.out.println(JSON.toJSONString(nSums));
     }
 
