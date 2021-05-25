@@ -76,6 +76,39 @@ public class 股票买卖 {
     }
 
 
+    /**
+     * k = +infinity with cooldown
+     * 每次 sell 之后要等一天才能继续交易。只要把这个特点融入上一题的状态转移方程即可：
+     *
+     * @param prices
+     * @return
+     */
+    public int maxProfitKInfWithCoolDown(int[] prices) {
+        int[][] dp = new int[prices.length][2];
+        for (int i = 0; i < prices.length; i++) {
+            if (i - 1 < 0 || i - 2 < 0) {
+                dp[i][0] = 0;
+                dp[i][1] = -prices[i];
+                continue;
+            }
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 2][0] - prices[i]);
+        }
+
+
+        // int dp_i_0 = 0, dp_i_1 = Integer.MIN_VALUE, dp_pre_0 = 0;
+        // for (int i = 0; i < prices.length; i++) {
+        //     int temp = dp_i_0;
+        //     dp_i_0 = Math.max(dp_i_0, dp_i_1 + prices[i]);
+        //     dp_i_1 = Math.max(dp_i_1, dp_pre_0 - prices[1]);
+        //     dp_pre_0 = temp;
+        // }
+        // return dp_i_0;
+
+        return dp[prices.length - 1][0];
+    }
+
+
     public static void main(String[] args) {
         股票买卖 c = new 股票买卖();
         int[] ints = {7, 1, 5, 3, 6, 4};
@@ -84,6 +117,9 @@ public class 股票买卖 {
         System.out.println("---------");
         ints = new int[]{7, 1, 5, 3, 6, 4};
         System.out.println(c.maxProfitKInf(ints));
+        System.out.println("---------");
+        ints = new int[]{1, 2, 3, 0, 2};
+        System.out.println(c.maxProfitKInfWithCoolDown(ints));
     }
 
 }
