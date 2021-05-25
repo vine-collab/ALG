@@ -25,8 +25,8 @@ public class 博弈问题 {
         }
 
         // 斜着遍历
-        for (int k = 2; k < length; k++) {
-            for (int i = 0; i < length - 1; i++) {
+        for (int k = 2; k <= length; k++) {
+            for (int i = 0; i <= length - k; i++) {
                 int j = k + i - 1;
                 // 先手左边，和右边的分数
                 int left = piles[i] + (Integer) dp[i + 1][j].getRight();
