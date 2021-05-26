@@ -76,6 +76,25 @@ public class 股票买卖 {
     }
 
 
+    public int maxProfitWithFee(int[] prices, int fee) {
+
+        int[][] dp = new int[prices.length][2];
+        for (int i = 0; i < prices.length; i++) {
+            if (i - 1 < 0) {
+                dp[i][0] = 0;
+                dp[i][1] = -prices[i];
+                continue;
+            }
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i] - fee);
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i] );
+        }
+
+
+        return dp[prices.length - 1][0];
+    }
+
+
+
     /**
      * k = +infinity with cooldown
      * 每次 sell 之后要等一天才能继续交易。只要把这个特点融入上一题的状态转移方程即可：
@@ -120,6 +139,9 @@ public class 股票买卖 {
         System.out.println("---------");
         ints = new int[]{1, 2, 3, 0, 2};
         System.out.println(c.maxProfitKInfWithCoolDown(ints));
+        System.out.println("---------");
+        ints = new int[]{1, 3, 2, 8, 4, 9};
+        System.out.println(c.maxProfitWithFee(ints, 2));
     }
 
 }
