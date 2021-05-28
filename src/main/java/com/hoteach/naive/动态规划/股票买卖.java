@@ -27,6 +27,52 @@ public class 股票买卖 {
      * k = 1
      * <p>
      * <p>
+     * dp[i][k][0] = max{dp[i-1][k][0], dp[i-1][k][1]+prices[i]}=max{前一天就没有股票，前一天股票卖了}
+     * dp[i][k][1] = max{dp[i-1][k][1], dp[i-1][k-1][0]-prices[i]}=max{前一天就有，前一天买了股票}
+     *
+     * @param prices
+     * @return
+     */
+    public int maxProfitMaxK(int[] prices, int maxK) {
+
+        int[][][] dp = new int[prices.length][maxK + 1][2];
+        dp[0][0][0] = 0;
+        dp[0][1][0] = 0;
+        dp[0][1][1] = prices[0];
+        dp[0][2][0] = 0;
+        dp[0][2][1] = Integer.MIN_VALUE;
+        for (int i = 0; i < prices.length; i++) {
+            for (int k = maxK; k > 0; k--) {
+                if (i - 1 == -1) {
+                    continue;
+                }
+
+                dp[i][k][0] = Math.max(dp[i - 1][k][0], dp[i - 1][k][1] + prices[i]);
+                dp[i][k][1] = Math.max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i]);
+            }
+        }
+        return dp[prices.length - 1][maxK][0];
+    }
+
+
+    public int maxProfitMaxK2(int[] prices) {
+
+        int dp_110 = 0, dp_i11 = Integer.MIN_VALUE;
+        int dp_120 = 0, dp_121 = Integer.MIN_VALUE;
+        for (int price : prices) {
+            dp_120 = Math.max(dp_120, dp_121 + price);
+            dp_121 = Math.max(dp_121, dp_110 - price);
+            dp_110 = Math.max(dp_110, dp_i11 + price);
+            dp_i11 = Math.max(dp_i11, -price);
+
+        }
+        return dp_120;
+    }
+
+    /**
+     * k = 1
+     * <p>
+     * <p>
      * dp[i][1][0] = max{dp[i-1][1][0], dp[i-1][1][1]+prices[i]} = max{dp[i-1][0], dp[i-1][1]+prices[i]} = dp[i][0]
      * dp[i][1][1] = max{dp[i-1][1][1], dp[i-1][0][0]-prices[i]} = max{dp[i-1][1][1], -prices[i]} = max{dp[i-1][1], -prices[i]} = dp[i][1]
      *
@@ -86,13 +132,12 @@ public class 股票买卖 {
                 continue;
             }
             dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i] - fee);
-            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i] );
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
         }
 
 
         return dp[prices.length - 1][0];
     }
-
 
 
     /**
@@ -142,6 +187,43 @@ public class 股票买卖 {
         System.out.println("---------");
         ints = new int[]{1, 3, 2, 8, 4, 9};
         System.out.println(c.maxProfitWithFee(ints, 2));
+        System.out.println("---------");
+        ints = new int[]{1, 2, 3, 4, 5};
+        System.out.println(c.maxProfitMaxK(ints, 2));
+        System.out.println("---------");
+        ints = new int[]{1, 2, 3, 4, 5};
+        System.out.println(c.maxProfitMaxK2(ints));
     }
+
+    public static int maxProfitK(int k, int[] prices) {
+        if (k < 1) {
+            return 0;
+        }
+        if (k >= prices.length / 2) {
+            return greedy(prices);
+        }
+        int[][] t = new int[k][2];
+        for (int i = 0; i < k; ++i)
+            t[i][0] = Integer.MIN_VALUE;
+        for (int p : prices) {
+            t[0][0] = Math.max(t[0][0], -p);
+            t[0][1] = Math.max(t[0][1], t[0][0] + p);
+            for (int i = 1; i < k; ++i) {
+                t[i][0] = Math.max(t[i][0], t[i - 1][1] - p);
+                t[i][1] = Math.max(t[i][1], t[i][0] + p);
+            }
+        }
+        return t[k - 1][1];
+    }
+
+    private static int greedy(int[] prices) {
+        int max = 0;
+        for (int i = 1; i < prices.length; ++i) {
+            if (prices[i] > prices[i - 1])
+                max += prices[i] - prices[i - 1];
+        }
+        return max;
+    }
+
 
 }
