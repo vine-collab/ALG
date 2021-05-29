@@ -10,15 +10,17 @@ import java.util.Map;
 
 public class 打家劫舍 {
 
+
+    /**************House Robber I start*****************/
     private Map<Integer, Integer> map = new HashMap<>();
 
-    public int rob(int[] nums) {
+    public int robI(int[] nums) {
         return funRob(nums, 0);
     }
 
     public int funRob(int[] nums, int start) {
         Integer integer = map.get(start);
-        if(integer != null) {
+        if (integer != null) {
             return integer;
         }
         if (start >= nums.length) {
@@ -32,11 +34,95 @@ public class 打家劫舍 {
     }
 
 
+    public int robDp(int[] nums) {
+        // dp[i] 表示从第i间房子抢到最多的钱为dp[i], dp[nums.length] = 0;
+        // 初始化数组长度为 nums.length+2，免于处理 i+2和i+1数组越界的问题
+        int[] dp = new int[nums.length + 2];
+        for (int i = nums.length - 1; i >= 0; i--) {
+            //               不抢，      抢
+            dp[i] = Math.max(dp[i + 1], dp[i + 2] + nums[i]);
+        }
+        return dp[0];
+    }
+
+    public int robDpO1(int[] nums) {
+        // dp[i] 表示从第i间房子抢到最多的钱为dp[i], dp[nums.length] = 0;
+        int dpi1 = 0, dpi2 = 0;
+        int dpi = 0;
+
+        for (int i = nums.length - 1; i >= 0; i--) {
+            //               不抢，      抢
+            dpi = Math.max(dpi1, dpi2 + nums[i]);
+            dpi2 = dpi1;
+            dpi1 = dpi;
+        }
+        return dpi;
+    }
+    /**************House Robber I end*****************/
+
+
+    /**************House Robber II start*****************/
+    /*
+    情况一：两头都不抢
+    情况二：抢头不抢尾
+    情况三：抢尾不抢头
+    综合来看，二三肯定是优于一
+    于是，在上述算法上取二三最大值即可
+     */
+    public int robII(int[] nums) {
+        if(nums.length == 1) {
+            return nums[0];
+        }
+        return Math.max(dpII(nums, nums.length - 1, 1), dpII(nums, nums.length - 2, 0));
+    }
+
+    int dpII(int[] nums, int start, int end) {
+        int dpi1 = 0, dpi2 = 0, dpi = 0;
+        for (int i = start; i >= end; i--) {
+            dpi = Math.max(dpi1, nums[i] + dpi2);
+            dpi2 = dpi1;
+            dpi1 = dpi;
+        }
+
+
+        return dpi;
+    }
+    
+    /**************House Robber II end*****************/
+
     public static void main(String[] args) {
         打家劫舍 c = new 打家劫舍();
-        int rob = c.rob(new int[]{2, 7, 9, 3, 1});
+        int rob = c.robI(new int[]{2, 7, 9, 3, 1});
         System.out.println(rob);
+        System.out.println("-----------");
+        System.out.println(c.robDp(new int[]{2, 7, 9, 3, 1}));
+        System.out.println("-----------");
+        System.out.println(c.robDpO1(new int[]{2, 7, 9, 3, 1}));
+        System.out.println("-----------");
+        System.out.println(c.robII(new int[]{1, 7}));
 
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
