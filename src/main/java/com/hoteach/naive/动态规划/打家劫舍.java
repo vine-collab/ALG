@@ -70,7 +70,7 @@ public class 打家劫舍 {
     于是，在上述算法上取二三最大值即可
      */
     public int robII(int[] nums) {
-        if(nums.length == 1) {
+        if (nums.length == 1) {
             return nums[0];
         }
         return Math.max(dpII(nums, nums.length - 1, 1), dpII(nums, nums.length - 2, 0));
@@ -87,8 +87,57 @@ public class 打家劫舍 {
 
         return dpi;
     }
-    
+
     /**************House Robber II end*****************/
+
+    /**************House Robber III start*****************/
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    private Map<TreeNode, Integer> memory = new HashMap<>();
+
+    public int robIII(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        Integer memo = memory.get(root);
+        if (memo != null) {
+            return memo;
+        }
+
+        // 抢，然后去下下家
+        int doRob = root.val;
+        if (root.left != null) {
+            doRob = doRob + robIII(root.left.left) + robIII(root.left.right);
+        }
+        if (root.right != null) {
+            doRob = doRob + robIII(root.right.left) + robIII(root.right.right);
+        }
+
+        // 不抢，去下家
+        int notRob = robIII(root.left) + robIII(root.right);
+        int max = Math.max(doRob, notRob);
+        memory.put(root, max);
+        return max;
+    }
+
+    /**************House Robber III end*****************/
 
     public static void main(String[] args) {
         打家劫舍 c = new 打家劫舍();
