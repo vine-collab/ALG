@@ -47,7 +47,7 @@ import java.util.stream.Collectors;
  * 链接：https://leetcode-cn.com/problems/sort-characters-by-frequency
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  *
- * @author tengyue(hk177955)
+ * @author 阿季
  * @date 2020-06-29 2:28 PM
  */
 
