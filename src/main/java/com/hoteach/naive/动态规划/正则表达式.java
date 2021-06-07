@@ -64,9 +64,12 @@ public class 正则表达式 {
 
         boolean first = (s != null && s.length() != 0) && (p.charAt(0) == s.charAt(0) || p.charAt(0) == '.');
         if (p.length() >= 2 && p.charAt(1) == '*') {
-            return isMatch(s, p.substring(2)) || (first && isMatch(s.substring(1), p));
+            boolean match = isMatchTest(s, p.substring(2))
+                    || (first
+                    && isMatchTest(s.substring(1), p));
+            return match;
         } else {
-            return first && isMatch(s.substring(1), p.substring(1));
+            return first && isMatchTest(s.substring(1), p.substring(1));
         }
 
 
@@ -75,9 +78,9 @@ public class 正则表达式 {
 
     public static void main(String[] args) {
         正则表达式 c = new 正则表达式();
-        // System.out.println(c.isMatch("aa", ".*"));
+        System.out.println(c.isMatch("aab", "c*a*b"));
         System.out.println("------------------");
-        System.out.println(c.isMatchTest("aa", ".*"));
+        System.out.println(c.isMatchTest("aab", "c*a*b"));
     }
 
 }
