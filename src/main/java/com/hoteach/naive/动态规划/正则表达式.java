@@ -61,14 +61,17 @@ public class 正则表达式 {
         if (p.length() == 0) {
             return s.length() == 0;
         }
-
+        // 第一个字符
         boolean first = (s != null && s.length() != 0) && (p.charAt(0) == s.charAt(0) || p.charAt(0) == '.');
+
+        // 第二个字符是*号
         if (p.length() >= 2 && p.charAt(1) == '*') {
-            boolean match = isMatchTest(s, p.substring(2))
+            boolean match = isMatchTest(s, p.substring(2))  // 不重复前面的字符
                     || (first
-                    && isMatchTest(s.substring(1), p));
+                    && isMatchTest(s.substring(1), p)); // 重复前面的字符
             return match;
         } else {
+            // 第二个字符不是*号
             return first && isMatchTest(s.substring(1), p.substring(1));
         }
 
