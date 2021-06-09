@@ -43,8 +43,8 @@ public class LCS最长公共子序列 {
 
     public static void main(String[] args) {
         LCS最长公共子序列 c = new LCS最长公共子序列();
-        String s1 = "abcde";
-        String s2 = "ace";
+        String s1 = "abcdef";
+        String s2 = "acfe";
         int start1 = s1.length() - 1;
         int start2 = s2.length() - 1;
         int i = c.longestCommonSequence(s1, s2, start1, start2);
