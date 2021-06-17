@@ -1,5 +1,7 @@
 package com.hoteach.naive.leetcode;
 
+import com.alibaba.fastjson.JSON;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -50,39 +52,86 @@ public class 最长递增子序列的个数 {
     }
 
 
-    public int findNumberOfLIS1(int[] nums) {
+    public int findNumberOfLISDp(int[] nums) {
         // 以nums[i]结尾的最长递增子序列长度为dp[i]
         int[] dp = new int[nums.length];
         Arrays.fill(dp, 1);
-        // 以nums[i]结尾的最长递增子序列的个数为dp[i]
+        // nums[0...i]中的最长递增子序列的个数为count[i]
         int[] count = new int[nums.length];
         Arrays.fill(count, 1);
 
-        for (int i = 0; i < nums.length; i++) {
+
+        for (int i = 1; i < nums.length; i++) {
             for (int j = 0; j < i; j++) {
                 if (nums[j] < nums[i]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                    int dpi = dp[i];
-                    int dpj = dp[j];
-
-                    if (dpj + 1 > dpi) {
-                        count[i] = count[i]++;
+                    if (dp[j] + 1 > dp[i]) {
+                        dp[i] = dp[j] + 1;
+                        count[i] = count[j];
+                    } else if (dp[j] + 1 == dp[i]) {
+                        count[i] += count[j];
                     }
                 }
             }
         }
 
 
-        return count[1];
+        System.out.println(JSON.toJSONString(dp));
+        System.out.println(JSON.toJSONString(count));
+
+        int dpMax = Arrays.stream(dp).max().getAsInt();
+        int sum = 0;
+        for (int i = 0; i < dp.length; i++) {
+            if (dp[i] == dpMax) {
+                sum += count[i];
+            }
+        }
+        return sum;
+    }
+
+
+    public int test(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+
+        int[] dp = new int[nums.length];
+        int[] combination = new int[nums.length];
+
+        Arrays.fill(dp, 1);
+        Arrays.fill(combination, 1);
+
+        int max = 1, res = 0;
+
+        for (int i = 1; i < dp.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    if (dp[j] + 1 > dp[i]) { //如果+1长于当前LIS 则组合数不变
+                        dp[i] = dp[j] + 1;
+                        combination[i] = combination[j];
+                    } else if (dp[j] + 1 == dp[i]) { //如果+1等于当前LIS 则说明找到了新组合
+                        combination[i] += combination[j];
+                    }
+                }
+            }
+            max = Math.max(max, dp[i]);
+        }
+
+        for (int i = 0; i < nums.length; i++)
+            if (dp[i] == max) res += combination[i];
+
+        return res;
     }
 
 
     public static void main(String[] args) {
         最长递增子序列的个数 c = new 最长递增子序列的个数();
-        int numberOfLIS = c.findNumberOfLIS(new int[]{2, 2, 2, 2, 2});
-        System.out.println(numberOfLIS);
-        int a = c.findNumberOfLIS1(new int[]{1, 3, 5, 4, 7});
+        // int numberOfLIS = c.findNumberOfLIS(new int[]{2, 2, 2, 2, 2});
+        // System.out.println(numberOfLIS);
+        int a = c.findNumberOfLISDp(new int[]{1, 2, 4, 3, 5, 4, 7, 2});
         System.out.println(a);
+
+        int t = c.test(new int[]{1, 2, 4, 3, 5, 4, 7, 2});
+        System.out.println(t);
 
     }
 
