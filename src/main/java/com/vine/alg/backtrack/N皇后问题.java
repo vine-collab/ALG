@@ -32,6 +32,10 @@ public class N皇后问题 {
 
         n.solveNQueens(result, board, 0);
 
+        System.out.println("---------------");
+
+        n.solveNQueen(result, board, 0);
+
     }
 
 
@@ -60,6 +64,44 @@ public class N皇后问题 {
             e.printStackTrace();
         }
 
+
+    }
+
+    /**
+     * 只需要一种结果的算法
+     * @param result
+     * @param board
+     * @param row
+     * @return
+     */
+    boolean solveNQueen(List<List<List<String>>> result, List<List<String>> board, int row) {
+        try {
+            if (row == board.size()) {
+                // 注意list拷贝问题
+                List<List<String>> lists = Lists.newArrayList(board);
+                result.add(lists);
+                lists.forEach(list -> System.out.println(JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect)));
+                return true;
+            }
+
+            // 棋盘的列数
+            int n = board.get(row).size();
+            for (int col = 0; col < n; col++) {
+                if (!isValid(board, col, row)) {
+                    continue;
+                }
+                List<String> rows = board.get(row);
+                rows.set(col, "Q");
+                if (this.solveNQueen(result, board, row + 1)) {
+                    return true;
+                }
+                rows.set(col, ".");
+            }
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
 
     }
 
