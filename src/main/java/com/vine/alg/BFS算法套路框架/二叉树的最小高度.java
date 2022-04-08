@@ -4,11 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.vine.alg.基本数据结构构造.TreeNode;
 
-import javax.swing.text.html.HTML;
 import java.util.ArrayDeque;
-import java.util.HashSet;
 import java.util.Queue;
-import java.util.Set;
 
 /**
  * @author 阿季
@@ -51,7 +48,7 @@ public class 二叉树的最小高度 {
      * 分析：起点：根节点，终点（叶子节点）：条件(左子树和右子树都不存在)，node.left == null && node.right == null
      */
     int binaryTreeMinDepth(TreeNode tree) {
-        if(tree == null) {
+        if (tree == null) {
             return 0;
         }
         Queue<TreeNode> queue = new ArrayDeque<>();
@@ -60,7 +57,8 @@ public class 二叉树的最小高度 {
         int high = 1;
 
         while (queue.size() != 0) {
-            for (int i = 0; i < queue.size(); i++) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
                 TreeNode cur = queue.poll();
                 if (cur.leftChild == null && cur.rightChild == null) {
                     return high;
