@@ -1,9 +1,6 @@
 package com.vine.alg.双指针技巧套路框架.快慢指针;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.vine.alg.基本数据结构构造.LinkNode;
 
 /**
  * @author 阿季
@@ -35,7 +32,7 @@ public class 判断链表中是否有环 {
         LinkNode fast = linkNode;
         LinkNode slow = linkNode;
 
-        while (fast != null && slow != null) {
+        while (fast != null && fast.getNext() != null) {
             fast = fast.getNext().getNext();
             slow = slow.getNext();
             if (fast == slow) {
@@ -47,27 +44,3 @@ public class 判断链表中是否有环 {
 
 }
 
-@Builder
-@Data
-@Setter
-@NoArgsConstructor
-class LinkNode {
-    private LinkNode pre;
-    private LinkNode next;
-
-    public LinkNode getPre() {
-        return pre;
-    }
-
-    public void setPre(LinkNode pre) {
-        this.pre = pre;
-    }
-
-    public LinkNode getNext() {
-        return next;
-    }
-
-    public void setNext(LinkNode next) {
-        this.next = next;
-    }
-}
