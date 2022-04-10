@@ -11,7 +11,7 @@ import java.util.Map;
 public class 最小覆盖子串 {
     public static void main(String[] args) {
         最小覆盖子串 z = new 最小覆盖子串();
-        String s = z.minWindow("abcdc", "db");
+        String s = z.minWindow("abcdc", "ba");
         System.out.println(s);
     }
 
@@ -19,10 +19,10 @@ public class 最小覆盖子串 {
 
         Map<Character, Integer> need = new HashMap<>();
         Map<Character, Integer> window = new HashMap<>();
-        for (int i = 0; i < s.toCharArray().length; i++) {
-            need.put(s.charAt(i), need.getOrDefault(s.charAt(i), 0) + 1);
+        for (int i = 0; i < t.toCharArray().length; i++) {
+            need.put(t.charAt(i), need.getOrDefault(t.charAt(i), 0) + 1);
         }
-
+        // 初始化指针位置
         int left = 0, right = 0;
         // 记录最小覆盖子串的起始索引及长度
         int start = 0, len = Integer.MAX_VALUE;
@@ -39,6 +39,7 @@ public class 最小覆盖子串 {
                 }
             }
 
+            System.out.println(left + "-" + right);
             // 判断左侧窗口是否要收缩
             while (valid == need.size()) {
                 // 更新最小覆盖子串
@@ -64,7 +65,7 @@ public class 最小覆盖子串 {
 
         // 返回最小覆盖子串
         return len == Integer.MAX_VALUE ?
-                "" : s.substring(start, len);
+                "" : s.substring(start, start + len);
     }
 
 }
