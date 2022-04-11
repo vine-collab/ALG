@@ -85,7 +85,7 @@ public class SlidingWindow {
         }
 
 
-        return len == Integer.MAX_VALUE ? null : s.substring(start, len + 1);
+        return len == Integer.MAX_VALUE ? null : s.substring(start, start + len);
     }
 
 

@@ -49,8 +49,8 @@ public class 最小覆盖子串 {
                 }
                 // d是将要移出的字符
                 char d = s.charAt(left);
-                // 左侧窗口右移
                 left++;
+                // 左侧窗口右移
                 if (need.containsKey(d)) {
                     if (window.get(d).equals(need.get(d))) {
                         valid--;
