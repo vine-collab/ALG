@@ -1,37 +1,45 @@
 package com.vine.alg.双指针技巧套路框架.滑动窗口;
 
+import com.alibaba.fastjson.JSON;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * @author 阿季
- * @date 2022-04-10 5:49 PM
+ * @date 2022-04-11 9:19 PM
  */
 
-public class 最小覆盖子串 {
+public class 找所有字母的异位字母 {
+
     public static void main(String[] args) {
-        最小覆盖子串 z = new 最小覆盖子串();
-        String s = z.minWindow("abcdc", "cd");
-        System.out.println(s);
+        try {
+            找所有字母的异位字母 z = new 找所有字母的异位字母();
+            List<Integer> anagrams = z.findAnagrams("cbaebabacd", "abc");
+            System.out.println(JSON.toJSONString(anagrams));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
-    String minWindow(String s, String t) {
 
+    List<Integer> findAnagrams(String s, String t) {
         Map<Character, Integer> need = new HashMap<>();
         Map<Character, Integer> window = new HashMap<>();
         for (int i = 0; i < t.toCharArray().length; i++) {
             need.put(t.charAt(i), need.getOrDefault(t.charAt(i), 0) + 1);
         }
         // 初始化指针位置
+        List<Integer> result = new ArrayList<>();
         int left = 0, right = 0;
-        // 记录最小覆盖子串的起始索引及长度
         int start = 0, len = Integer.MAX_VALUE;
-        // 其中valid变量表示窗口中满足need条件的字符个数，如果valid和need.size的大小相同，则说明窗口已满足条件，已经完全覆盖了串T
         int valid = 0;
         while (right < s.length()) {
-            Character c = s.charAt(right);
+            char c = s.charAt(right);
             right++;
-            // 窗口内数据更新
             if (need.containsKey(c)) {
                 window.put(c, window.getOrDefault(c, 0) + 1);
                 if (need.get(c).equals(window.get(c))) {
@@ -39,20 +47,16 @@ public class 最小覆盖子串 {
                 }
             }
 
-            System.out.println(left + "-" + right);
-            // 判断左侧窗口是否要收缩
-            while (valid == need.size()) {
-                // 更新最小覆盖子串
-                if (right - left < len) {
-                    start = left;
-                    len = right - left;
+            while (right - left >= t.length()) {
+                if (valid == need.size()) {
+                    result.add(left);
                 }
-                // d是将要移出的字符
+
+
                 char d = s.charAt(left);
                 left++;
-                // 左侧窗口右移
                 if (need.containsKey(d)) {
-                    if (window.get(d).equals(need.get(d))) {
+                    if (need.get(d).equals(window.get(d))) {
                         valid--;
                     }
                     window.put(d, window.get(d) - 1);
@@ -60,26 +64,10 @@ public class 最小覆盖子串 {
 
             }
 
+
         }
 
 
-        // 返回最小覆盖子串
-        return len == Integer.MAX_VALUE ?
-                "" : s.substring(start, start + len);
+        return result;
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
