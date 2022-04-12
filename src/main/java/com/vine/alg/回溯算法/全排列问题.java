@@ -1,4 +1,4 @@
-package com.vine.alg.backtrack;
+package com.vine.alg.回溯算法;
 
 import com.alibaba.fastjson.JSON;
 import lombok.Getter;
