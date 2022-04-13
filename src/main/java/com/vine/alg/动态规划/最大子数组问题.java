@@ -12,6 +12,8 @@ public class 最大子数组问题 {
             最大子数组问题 z = new 最大子数组问题();
             int i = z.maxSubArray(new int[]{-3, 1, 3, -1, 2, -4, 2});
             System.out.println(i);
+            int i1 = z.maxSubArrayAdvance(new int[]{-3, 1, 3, -1, 2, -4, 2});
+            System.out.println(i1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,6 +36,23 @@ public class 最大子数组问题 {
 
         return Arrays.stream(dp).max().getAsInt();
     }
+
+    int maxSubArrayAdvance(int[] nums) {
+
+        int dp_pre = nums[0];
+        int dp = 0, res = dp_pre;
+        for (int i = 1; i < nums.length; i++) {
+
+            dp = Integer.max(nums[i], nums[i] + dp_pre);
+            dp_pre = dp;
+            res = Integer.max(dp, res);
+        }
+
+
+        return res;
+    }
+
+
 
 
 }
