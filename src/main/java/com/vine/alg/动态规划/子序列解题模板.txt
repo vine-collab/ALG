@@ -1,0 +1,33 @@
+
+
+1、第一种思路是一个一维的dp数组：
+    int n = array.length;
+    int[] dp = new int[n];
+    for(int i = 1; i < n; i++) {
+        for (int i = 1; i < n; i++) {
+            dp[i] = 最值(dp[i], dp[j] + ...);
+        }
+    }
+
+  dp数组的定义：在子数组array[0...i] 中，以array[i] 结尾的 ... 的 ... 为dp[i]
+
+
+
+2、第二种思路是一个二维的dp数组：涉及两个字符串/数组的子序列问题
+    int n = array.length;
+    int[][] dp = new int[n][n];
+    for(int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
+            if(array[i] == array[j]) {
+                dp[i][j] = dp[i][j] + ...
+            } else {
+                dp[i] = 最值(...);
+            }
+        }
+    }
+
+ 2.1、涉及两个字符串/数组时，dp数组的含义如下：
+    在子数组arr[0...i] 和子数组 arr2[0...j] 中，要的子序列（最长公共子序列）长度为dp[i][j]。
+
+ 2.2、涉及一个字符串/数组时，dp数组的含义如下：
+    在子数组arr[0...i] ，要的子序列（最长回文子序列）长度为dp[i][j]。
