@@ -52,9 +52,9 @@ public class 四键键盘 {
 
     public static void main(String[] args) {
         四键键盘 c = new 四键键盘();
-        int i = c.maxA(7);
+        int i = c.maxA(5);
         System.out.println(i);
-        int i1 = c.maxA2(7);
+        int i1 = c.maxA2(5);
         System.out.println(i1);
     }
 }
