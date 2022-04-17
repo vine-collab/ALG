@@ -74,10 +74,11 @@ public class 戳气球 {
         int[] balloon = new int[nums.length + 2];
         balloon[0] = balloon[n + 1] = 1;
         System.arraycopy(nums, 0, balloon, 1, nums.length);
+        // dp:戳破 i和j之间的气球，不包括i和j 获得的最高分
         int[][] dp = new int[n + 2][n + 2];
 
         for (int i = n + 1; i >= 0; i--) {
-            for (int j = i + 1; j < n + 2; j++) {
+            for (int j = i + 1; j <= n + 1; j++) {
                 for (int k = i + 1; k < j; k++) {
                     dp[i][j] = Integer.max(dp[i][j], dp[i][k] + dp[k][j] + balloon[i] * balloon[j] * balloon[k]);
                 }
