@@ -1,5 +1,6 @@
 package com.vine.alg.动态规划;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +17,8 @@ public class 戳气球 {
             戳气球 b = new 戳气球();
             int i = b.maxBalloon(new int[]{3, 1, 5, 8});
             System.out.println(i);
+            int i1 = b.dp(new int[]{3, 1, 5, 8});
+            System.out.println(i1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,12 +62,32 @@ public class 戳气球 {
             List<Integer> temp = new ArrayList<>(nums);
             Integer remove = temp.remove(i);
             backtrack(temp, score + point);
-            temp.add(i, remove);
+//            temp.add(i, remove);
         }
 
 
     }
 
+
+    int dp(int[] nums) {
+        int n = nums.length;
+        int[] balloon = new int[nums.length + 2];
+        balloon[0] = balloon[n + 1] = 1;
+        System.arraycopy(nums, 0, balloon, 1, nums.length);
+        int[][] dp = new int[n + 2][n + 2];
+
+        for (int i = n + 1; i >= 0; i--) {
+            for (int j = i + 1; j < n + 2; j++) {
+                for (int k = i + 1; k < j; k++) {
+                    dp[i][j] = Integer.max(dp[i][j], dp[i][k] + dp[k][j] + balloon[i] * balloon[j] * balloon[k]);
+                }
+            }
+
+        }
+
+
+        return dp[0][n + 1];
+    }
 
 }
 
