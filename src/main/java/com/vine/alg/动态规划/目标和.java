@@ -27,7 +27,7 @@ public class 目标和 {
 
 
     void backtrack(int[] nums, int pos, int target, int val) {
-        if (pos >= nums.length - 1) {
+        if (pos == nums.length) {
             if (target == val) {
                 res++;
             }
