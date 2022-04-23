@@ -31,7 +31,7 @@ public class 最长回文子序列 {
 
     public static void main(String[] args) {
         最长回文子序列 c = new 最长回文子序列();
-        int bbbab = c.longestPalindromeSubseq("bbbab");
+        int bbbab = c.longestPalindromeSubseq("bbcbab");
         System.out.println(bbbab);
     }
 
