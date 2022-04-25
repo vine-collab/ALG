@@ -13,6 +13,8 @@ public class 跳跃游戏_II {
         跳跃游戏_II t = new 跳跃游戏_II();
         int dp = t.jump(new int[]{2, 1});
         System.out.println(dp);
+        int i = t.jump1(new int[]{2, 1});
+        System.out.println(i);
     }
 
 
@@ -45,10 +47,13 @@ public class 跳跃游戏_II {
 
     /*
         pos表示当前的位置
+        表示从pos跳到最后最少要 minJumpMemo步
+        结果就是minJumpMemo(nums, 0)
+
      */
     int minJumpMemo(int[] nums, int pos, Map<Integer, Integer> memo) {
         int length = nums.length;
-        // 到达末尾
+        // base case到达末尾
         if (pos >= length - 1) {
             return 0;
         }
@@ -56,19 +61,19 @@ public class 跳跃游戏_II {
             return memo.get(pos);
         }
 
-        int res = length + 1;
         int num = nums[pos];
+        int step = num;
         if (num == 0) {
-            return res;
+            return step;
         }
         for (int i = 1; i <= num; i++) {
             // 跳了一次
             int times = minJumpMemo(nums, pos + i, memo) + 1;
-            res = Integer.min(res, times);
+            step = Integer.min(step, times);
 
         }
-        memo.put(pos, res);
-        return res;
+        memo.put(pos, step);
+        return step;
 
 
     }
@@ -80,12 +85,25 @@ public class 跳跃游戏_II {
     dp[i] =
 
      */
-    int dp(int[] nums) {
+    int jump1(int[] nums) {
 
-        int[] dp = new int[nums.length];
+        int length = nums.length;
+        // 从[i...end]起跳，能跳的最远距离
+        int end = 0;
 
+        int farthest = 0;
 
-        return 0;
+        // 记录跳的次数
+        int jumps= 0;
+        for (int i = 0; i < length - 1; i++) {
+            farthest = Integer.max(farthest, i + nums[i]);
+            if(end == i) {
+                jumps ++;
+                end = farthest;
+            }
+        }
+
+        return jumps;
     }
 
 }
