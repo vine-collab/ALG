@@ -11,7 +11,7 @@ import java.util.Map;
 public class 跳跃游戏_II {
     public static void main(String[] args) {
         跳跃游戏_II t = new 跳跃游戏_II();
-        int dp = t.jump(new int[]{2,1});
+        int dp = t.jump(new int[]{2, 1});
         System.out.println(dp);
     }
 
@@ -52,13 +52,13 @@ public class 跳跃游戏_II {
         if (pos >= length - 1) {
             return 0;
         }
-        if(memo.containsKey(pos)) {
+        if (memo.containsKey(pos)) {
             return memo.get(pos);
         }
 
         int res = length + 1;
         int num = nums[pos];
-        if(num == 0) {
+        if (num == 0) {
             return res;
         }
         for (int i = 1; i <= num; i++) {
@@ -73,6 +73,20 @@ public class 跳跃游戏_II {
 
     }
 
+    /*
+    dp[i] 表示第i个位置需要跳的最少步数
+    dp[0] = 0
+
+    dp[i] =
+
+     */
+    int dp(int[] nums) {
+
+        int[] dp = new int[nums.length];
+
+
+        return 0;
+    }
 
 }
 
