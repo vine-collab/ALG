@@ -1,11 +1,10 @@
 package com.vine.alg.回溯算法解决_子集_集合_排列;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.omg.PortableInterceptor.INACTIVE;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author 阿季
@@ -32,8 +31,8 @@ public class 子集 {
 
     public static void main(String[] args) {
         子集 z = new 子集();
-        List<List<Integer>> subsets = z.subsets(new int[]{1, 2, 3});
-        System.out.println(JSON.toJSONString(subsets));
+        List<List<Integer>> subsets = z.subsets2(new int[]{1, 2, 3});
+        System.out.println(JSON.toJSONString(subsets, SerializerFeature.DisableCircularReferenceDetect));
     }
 
     List<List<Integer>> res = new ArrayList<>();
@@ -57,7 +56,7 @@ public class 子集 {
 
         for (int i = pos; i < nums.length; i++) {
             int num = nums[i];
-            if(cur.contains(num)) {
+            if (cur.contains(num)) {
                 continue;
             }
             cur.add(num);
@@ -68,16 +67,42 @@ public class 子集 {
 
 
     boolean contains(List<Integer> cur) {
-        if(res.size() == 0 && cur.size() == 0) {
+        if (res.size() == 0 && cur.size() == 0) {
             return true;
         }
         for (List<Integer> r : res) {
-            if(cur.size() != r.size()) {
+            if (cur.size() != r.size()) {
                 continue;
             }
             return cur.containsAll(r);
         }
         return false;
+    }
+
+
+    public List<List<Integer>> subsets2(int[] nums) {
+        if (nums.length == 0) {
+            ArrayList<Integer> integers = new ArrayList<>();
+            List<List<Integer>> r = new ArrayList<>();
+            r.add(integers);
+            return r;
+        }
+
+        int[] ints = Arrays.copyOf(nums, nums.length - 1);
+        List<List<Integer>> res = subsets2(ints);
+
+
+        List<List<Integer>> resCopy = new ArrayList<>();
+
+
+        for (List<Integer> subset : res) {
+            resCopy.add(new ArrayList<>(subset));
+            if (!subset.contains(nums[nums.length - 1]))
+                subset.add(nums[nums.length - 1]);
+        }
+        res.addAll(resCopy);
+
+        return res;
     }
 
 
