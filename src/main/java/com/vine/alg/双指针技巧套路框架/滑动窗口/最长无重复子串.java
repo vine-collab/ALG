@@ -13,7 +13,7 @@ import java.util.Map;
 public class 最长无重复子串 {
     public static void main(String[] args) {
         最长无重复子串 z = new 最长无重复子串();
-        int aabab = z.lengthOfLongestSubstring("aabcab");
+        int aabab = z.lengthOfLongestSubstring("aabcdab");
         System.out.println(aabab);
     }
 

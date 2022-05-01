@@ -66,8 +66,10 @@ public class $2_两数相加 {
 
     }
 
-    // 表示位数
 
+    /*
+        思路：342 + 465 每位相加只需要关注，个位：作为当前位的结果记录下来，十位作为下一个循环的起始结果累加
+     */
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         int result = 0;
         ListNode h1 = l1;
