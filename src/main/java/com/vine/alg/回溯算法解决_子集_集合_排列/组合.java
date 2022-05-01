@@ -18,8 +18,6 @@ public class 组合 {
         剑指 Offer II 080. 含有 k 个元素的组合
         给定两个整数 n 和 k，返回 1 ... n 中所有可能的 k 个数的组合。
 
-
-
         示例 1:
 
         输入: n = 4, k = 2
@@ -61,7 +59,7 @@ public class 组合 {
             res.add(integers);
             return;
         }
-
+        // 不重复 i 从pos开始
         for (int i = pos; i <= n; i++) {
             track.add(0, i);
             backtrack(n, k, i + 1, track);
