@@ -13,7 +13,7 @@ public class 正则表达式 {
     public static void main(String[] args) {
         try {
             正则表达式 z = new 正则表达式();
-            boolean i = z.isMatch("amnb", "a..b");
+            boolean i = z.isMatch("ab", ".*");
             System.out.println(i);
 
         } catch (Exception e) {
@@ -72,8 +72,8 @@ public class 正则表达式 {
         if (s.charAt(i) == p.charAt(j) || p.charAt(j) == '.') {
             if (j < plength - 1 && p.charAt(j + 1) == '*') {
 
-                res = dp(s, p, i + 1, j) // * 重复1次
-                        || dp(s, p, i, j + 2); // * 让前面字符不重复
+                res =  dp(s, p, i, j + 2) // 匹配0次，p指针 +2，s指正不变
+                        || dp(s, p, i + 1, j); // 匹配多次，p指针不变，s指针+1
             } else {
                 // 后移
                 res = dp(s, p, i + 1, j + 1);
