@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class TreeNode {
-    public TreeNode leftChild;
-    public TreeNode rightChild;
+    public TreeNode left;
+    public TreeNode right;
     public int val;
 
     public TreeNode(int x) {

@@ -23,13 +23,13 @@ public class 二叉树的最小高度 {
         TreeNode node5 = new TreeNode(-4);
         TreeNode node6 = new TreeNode(-5);
         TreeNode node7 = new TreeNode(5);
-        rootNode.leftChild = node1;
-        rootNode.rightChild = node2;
+        rootNode.left = node1;
+        rootNode.right = node2;
 
 //        node1.rightChild = node3;
-        node2.leftChild = node4;
+        node2.left = node4;
 
-        node3.leftChild = node5;
+        node3.left = node5;
 //        node4.rightChild = node6;
 
 //        node6.leftChild = node7;
@@ -60,16 +60,16 @@ public class 二叉树的最小高度 {
             int size = queue.size();
             for (int i = 0; i < size; i++) {
                 TreeNode cur = queue.poll();
-                if (cur.leftChild == null && cur.rightChild == null) {
+                if (cur.left == null && cur.right == null) {
                     return high;
                 }
 
-                if (cur.leftChild != null) {
-                    queue.add(cur.leftChild);
+                if (cur.left != null) {
+                    queue.add(cur.left);
                 }
 
-                if (cur.rightChild != null) {
-                    queue.add(cur.rightChild);
+                if (cur.right != null) {
+                    queue.add(cur.right);
                 }
             }
             high++;
