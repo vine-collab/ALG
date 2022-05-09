@@ -12,5 +12,13 @@ public class TreeNode {
         val = x;
     }
 
+    public TreeNode(String x) {
+        if(x == null) {
+            return;
+        }
+        val = Integer.parseInt(x);
+
+    }
+
 
 }

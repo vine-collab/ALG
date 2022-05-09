@@ -1,4 +1,4 @@
-package com.vine.alg.二叉树.遍历与还原;
+package com.vine.alg.二叉树.序列化与反序列;
 
 import com.vine.alg.基本数据结构构造.TreeNode;
 
