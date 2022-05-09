@@ -123,6 +123,9 @@ class ListNode {
     ListNode(){
     }
 
+    public String toString() {
+        return this.val + "";
+    }
 
     ListNode(int val) {
         this.val = val;
