@@ -1,5 +1,7 @@
 package com.vine.naive;
 
+import com.vine.alg.基本数据结构构造.ListNode;
+
 /**
  * 移除链表指定元素
  *
@@ -44,11 +46,3 @@ public class RemoveLinkedListElements {
 }
 
 
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode(int x) {
-        val = x;
-    }
-}
