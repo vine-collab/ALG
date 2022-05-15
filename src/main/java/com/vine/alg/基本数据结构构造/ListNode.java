@@ -49,4 +49,22 @@ public class ListNode {
 
     }
 
+    public static void printf(ListNode head) {
+        List<Integer> arr = new ArrayList<>();
+        ListNode temp = head;
+        while (temp != null) {
+            arr.add(temp.val);
+            temp = temp.next;
+        }
+        System.out.println(JSON.toJSONString(arr));
+    }
+
+
+    @Override
+    public String toString() {
+        return "ListNode{" +
+                "val=" + val +
+                ", next=" + next +
+                '}';
+    }
 }

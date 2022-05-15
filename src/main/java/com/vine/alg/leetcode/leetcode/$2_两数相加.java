@@ -95,7 +95,7 @@ public class $2_两数相加 {
         return temp.next;
     }
 
-    static class ListNode {
+    private static class ListNode {
 
         public int getVal() {
             return val;
