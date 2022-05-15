@@ -9,7 +9,7 @@ public class 打家劫舍2 {
     public static void main(String[] args) {
         try {
             打家劫舍2 d = new 打家劫舍2();
-            int dp = d.rob(new int[]{2,3,2});
+            int dp = d.rob(new int[]{1, 2, 3, 1});
             System.out.println(dp);
             int i = d.robDp(new int[]{2,3,2});
             System.out.println(i);
@@ -38,7 +38,7 @@ public class 打家劫舍2 {
     }
 
     int dp(int[] nums, int start, int end) {
-        if (start >= end) {
+        if (start > end) {
             return 0;
         }
         // 当前位置偷，不偷 的最大值
