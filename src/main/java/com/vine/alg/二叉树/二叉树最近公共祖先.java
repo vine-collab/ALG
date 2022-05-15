@@ -1,6 +1,5 @@
 package com.vine.alg.二叉树;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.REUtil;
 import com.vine.alg.基本数据结构构造.TreeNode;
 
 /**
