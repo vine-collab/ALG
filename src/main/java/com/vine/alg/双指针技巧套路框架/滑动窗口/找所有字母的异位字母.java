@@ -35,7 +35,6 @@ public class 找所有字母的异位字母 {
         // 初始化指针位置
         List<Integer> result = new ArrayList<>();
         int left = 0, right = 0;
-        int start = 0, len = Integer.MAX_VALUE;
         int valid = 0;
         while (right < s.length()) {
             char c = s.charAt(right);
