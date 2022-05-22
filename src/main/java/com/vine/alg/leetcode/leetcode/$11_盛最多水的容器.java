@@ -46,6 +46,8 @@ public class $11_盛最多水的容器 {
     }
 
 
+
+
     public int maxArea2(int[] height) {
         int left = 0, right = height.length - 1, res = 0;
         while (left < right) {
