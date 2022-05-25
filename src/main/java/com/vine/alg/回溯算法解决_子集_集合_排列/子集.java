@@ -31,7 +31,7 @@ public class 子集 {
 
     public static void main(String[] args) {
         子集 z = new 子集();
-        List<List<Integer>> subsets = z.subsets2(new int[]{1, 2, 3});
+        List<List<Integer>> subsets = z.subsets1(new int[]{1, 2, 3});
         System.out.println(JSON.toJSONString(subsets, SerializerFeature.DisableCircularReferenceDetect));
     }
 
@@ -104,6 +104,46 @@ public class 子集 {
 
         return res;
     }
+
+
+
+    public List<List<Integer>> subsets1(int[] nums) {
+        subset(nums, 0, new LinkedList());
+        res.add(new ArrayList<>());
+        return res;
+    }
+
+//    List<List<Integer>> res = new ArrayList<>();
+
+    void subset(int[] nums, int pos, LinkedList<Integer> path) {
+
+        if(!contains1(path)) {
+            res.add(new ArrayList(path));
+        }
+
+        for(int i = pos; i < nums.length; i++) {
+            if(path.contains(nums[i])) {
+                continue;
+            }
+            path.addLast(nums[i]);
+            subset(nums, i + 1, path);
+            path.removeLast();
+        }
+    }
+
+
+    boolean contains1(List<Integer> path) {
+        for(List<Integer> subset : res) {
+            if(subset.size() != path.size()) {
+                continue;
+            }
+            if (path.containsAll(subset)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
 }
