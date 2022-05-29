@@ -3,7 +3,7 @@ package com.vine.concurrency.providerandconsumer;
 import java.util.concurrent.*;
 
 /**
- * @author hekai
+ * @author  
  * @create 2017-12-31-15:04
  */
 public class Main {

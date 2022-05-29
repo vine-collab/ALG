@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 生产者
  *
- * @author hekai
+ * @author  
  * @create 2017-12-31-14:57
  */
 public class Provider implements Runnable {
