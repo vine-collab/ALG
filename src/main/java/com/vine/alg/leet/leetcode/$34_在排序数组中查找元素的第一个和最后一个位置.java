@@ -33,7 +33,7 @@ public class $34_在排序数组中查找元素的第一个和最后一个位置
      */
     public static void main(String[] args) {
         $34_在排序数组中查找元素的第一个和最后一个位置 z = new $34_在排序数组中查找元素的第一个和最后一个位置();
-        int[] ints = z.searchRange(new int[]{5}, 5);
+        int[] ints = z.searchRange1(new int[]{5}, 5);
         System.out.println(JSON.toJSONString(ints));
     }
 
@@ -62,7 +62,7 @@ public class $34_在排序数组中查找元素的第一个和最后一个位置
         }
         if (left != -1) {
             int second = left;
-            for (int i = left + 1; i < nums.length;i++) {
+            for (int i = left + 1; i < nums.length; i++) {
                 if (nums[left] == nums[i]) {
                     second = Integer.max(second, i);
                 }
@@ -72,6 +72,40 @@ public class $34_在排序数组中查找元素的第一个和最后一个位置
             return new int[]{-1, -1};
         }
     }
+
+
+    public int[] searchRange1(int[] nums, int target) {
+
+        if (nums.length == 1 && nums[0] == target) {
+            return new int[]{0, 0};
+        }
+
+        int left = 0, right = nums.length;
+
+        while (left < right) {
+            int m = left + (right - left) / 2;
+            int mid = nums[m];
+            if (mid == target) {
+                right = m;
+            } else if (mid > target) {
+                right = m;
+            } else {
+                left = m + 1;
+            }
+        }
+        if (left >= nums.length || nums[left] != target) {
+            return new int[]{-1, -1};
+        }
+        int r = left;
+        for (int i = left; i < nums.length; i++) {
+            if (nums[i] == nums[left]) {
+                r = Integer.max(i, r);
+            }
+        }
+        return new int[]{left, r};
+
+    }
+
 
 }
 
