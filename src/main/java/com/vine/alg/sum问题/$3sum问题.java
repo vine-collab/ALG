@@ -20,7 +20,7 @@ public class $3sum问题 {
     public static void main(String[] args) {
         $3sum问题 sum = new $3sum问题();
 
-        List<List<Integer>> lists = sum.threeSum(new int[]{-1, 0, 1, 2, 0, -1, -4}, 0);
+        List<List<Integer>> lists = sum.threeSum(new int[]{3, 0, -2, -1, 1, 2}, 0);
         System.out.println(JSON.toJSONString(lists));
     }
 

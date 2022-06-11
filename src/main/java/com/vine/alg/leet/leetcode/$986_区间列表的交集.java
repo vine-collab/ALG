@@ -54,6 +54,32 @@ public class $986_区间列表的交集 {
 
     }
 
+
+    public int[][] intervalIntersection2(int[][] firstList, int[][] secondList) {
+        int i = 0, j = 0;
+        List<List<Integer>> res = new ArrayList<>();
+        while (i < firstList.length && j < secondList.length) {
+            int a1 = firstList[i][0], a2 = firstList[i][1];
+            int b1 = secondList[j][0], b2 = secondList[j][1];
+            if (!(a1 > b2 || b1 > a2)) {
+                res.add(Arrays.asList(Integer.max(a1, b1), Integer.min(a2, b2)));
+            }
+            if (a2 > b2) {
+                j++;
+            } else {
+                i++;
+            }
+        }
+        int[][] ints = new int[res.size()][2];
+        for (int k = 0; k < res.size(); k++) {
+            int[] ints1 = {res.get(k).get(0), res.get(k).get(1)};
+            ints[k] = ints1;
+        }
+        return ints;
+
+
+    }
+
     public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
         List<List<Integer>> res = new ArrayList<>();
         for (int i = 0; i < firstList.length; i++) {
@@ -61,7 +87,7 @@ public class $986_区间列表的交集 {
             for (int j = 0; j < secondList.length; j++) {
                 int[] second = secondList[j];
                 int[] intersection = intersection(first, second);
-                if(intersection != null)  {
+                if (intersection != null) {
                     List<Integer> collect = Arrays.stream(intersection).boxed().collect(Collectors.toList());
                     res.add(collect);
                 }
@@ -78,15 +104,16 @@ public class $986_区间列表的交集 {
 
     /**
      * 没有交集返回null
+     *
      * @param a
      * @param b
      * @return
      */
     public int[] intersection(int[] a, int[] b) {
-        if(a.length == 0 || b.length ==0) {
+        if (a.length == 0 || b.length == 0) {
             return null;
         }
-        if(a[0] > b[1] || b[0] > a[1]) {
+        if (a[0] > b[1] || b[0] > a[1]) {
             return null;
         } else {
             return new int[]{Integer.max(a[0], b[0]), Integer.min(a[1], b[1])};

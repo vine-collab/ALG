@@ -36,7 +36,7 @@ public class $15_三数之和 {
     */
     public static void main(String[] args) {
         $15_三数之和 s = new $15_三数之和();
-        int[] ints = {-1, 0, 1, 2, -1, -4};
+        int[] ints = {3, 0, -2, -1, 1, 2};
         Arrays.sort(ints);
         List<List<Integer>> lists = s.threeSum(ints);
         System.out.println(JSON.toJSONString(lists));
@@ -49,6 +49,9 @@ public class $15_三数之和 {
         }
         for (int i = 0; i < nums.length; i++) {
             List<List<Integer>> list = twoSum(nums, i + 1, -nums[i]);
+            if (list.isEmpty()) {
+                continue;
+            }
             for (List<Integer> integers : list) {
                 List<Integer> copy = new ArrayList<>(integers);
                 copy.add(nums[i]);
@@ -69,20 +72,20 @@ public class $15_三数之和 {
             int l = nums[left], r = nums[right];
             int sum = l + r;
             if (target > sum) {
-                while (left < right && nums[right] == r) {
-                    right--;
-                }
-            } else if (target < sum) {
                 while (left < right && nums[left] == l) {
                     left++;
+                }
+            } else if (target < sum) {
+                while (left < right && nums[right] == r) {
+                    right--;
                 }
             } else {
                 res.add(Arrays.asList(nums[left], nums[right]));
-                while (left < right && nums[right] == r) {
-                    right--;
-                }
                 while (left < right && nums[left] == l) {
                     left++;
+                }
+                while (left < right && nums[right] == r) {
+                    right--;
                 }
             }
         }
