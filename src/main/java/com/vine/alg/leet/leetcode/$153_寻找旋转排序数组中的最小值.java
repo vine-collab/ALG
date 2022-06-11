@@ -38,12 +38,40 @@ public class $153_寻找旋转排序数组中的最小值 {
 
     public static void main(String[] args) {
         $153_寻找旋转排序数组中的最小值 x = new $153_寻找旋转排序数组中的最小值();
-        int min = x.findMin(new int[]{3,1});
+        int min = x.findMin(new int[]{3, 1});
         System.out.println(min);
     }
 
 
     public int findMin(int[] nums) {
+        int left = 0, right = nums.length - 1;
+
+        int min = Integer.MAX_VALUE;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int mv = nums[mid];
+            min = Integer.min(mv, min);
+
+            // 左侧有序
+            if (mv >= nums[left]) {
+                min = Integer.min(min, nums[left]);
+                left = mid + 1;
+            }
+            // 右侧有序
+            else {
+                min = Integer.min(min, nums[mid + 1]);
+                right = mid - 1;
+            }
+
+        }
+        return min;
+
+
+    }
+
+
+    public int findMin1(int[] nums) {
 
         int min = findMin(nums, 0, nums.length - 1, Integer.MAX_VALUE);
         return min;
@@ -66,7 +94,7 @@ public class $153_寻找旋转排序数组中的最小值 {
             return Integer.min(l, min);
         }
         // 降序
-        else if(m <= l && m >= r) {
+        else if (m <= l && m >= r) {
             return Integer.min(r, min);
         }
         // 左边是递增有序，递归右边数组

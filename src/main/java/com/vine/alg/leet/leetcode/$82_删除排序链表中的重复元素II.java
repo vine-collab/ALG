@@ -31,24 +31,37 @@ public class $82_删除排序链表中的重复元素II {
     }
 
     public ListNode deleteDuplicates(ListNode head) {
-        if (head == null || head.next == null) {
+        if(head == null || head.next == null) {
             return head;
         }
-        ListNode cur = head.next, pre = head;
-        int val = pre.val;
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+
+        ListNode pre = dummy;
+        ListNode cur = head;
+
         while (cur != null) {
-            if (cur.val == val) {
-                cur = cur.next.next;
+            if(cur.next != null && cur.val == cur.next.val) {
+                // 发现重复
+                while(cur.next != null && cur.val == cur.next.val) {
+                    cur = cur.next;
+                }
+                cur = cur.next;
+                if(cur == null) {
+                    pre.next = null;
+                }
+            } else {
                 pre.next = cur;
-                val = pre.val;
-                continue;
+                pre = pre.next;
+                cur = cur.next;
             }
-            cur = cur.next;
-            pre = pre.next;
-            val = pre.val;
 
         }
-        return head;
+
+        return dummy.next;
+
+
+
     }
 
     public ListNode deleteDuplicates2(ListNode head) {

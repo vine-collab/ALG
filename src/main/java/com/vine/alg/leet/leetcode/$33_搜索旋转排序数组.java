@@ -35,52 +35,47 @@ public class $33_搜索旋转排序数组 {
 
     public static void main(String[] args) {
         $33_搜索旋转排序数组 s = new $33_搜索旋转排序数组();
-        int[] ints = {5, 3, 1};
-        int search = s.search(ints, 5, 0, ints.length - 1);
+        int[] ints = {3, 1};
+        int search = s.search(ints, 1);
         System.out.println(search);
-        Integer integer = 100;
-        Integer integer2 = 100;
-        System.out.println(integer == integer2);
     }
 
     public int search(int[] nums, int target) {
-        if (nums.length == 0) {
-            return -1;
-        }
-        if (nums.length == 1) {
-            return nums[0] == target ? 0 : -1;
-        }
 
+        // 左右都闭的搜索区间
         int left = 0, right = nums.length - 1;
-
+        // 因为是闭区间，所以结束条件为 left > right
         while (left <= right) {
-            int middle = left + (right - left) / 2;
-            int m = nums[middle];
-            if (m == target) {
-                return middle;
+            int mid = left + (right - left) / 2;
+            // 首先检查 nums[mid]，是否找到 target
+            if (nums[mid] == target) {
+                return mid;
             }
-            // 左侧是有序的
-            if (nums[0] <= nums[middle]) {
-                if (nums[0] <= target && target < nums[middle]) {
-                    right = middle - 1;
+            // mid 落在断崖左边，此时 nums[left..mid] 有序
+            if (nums[mid] >= nums[left]) {
+                if (target >= nums[left] && target < nums[mid]) {
+                    // target 落在 [left..mid-1] 中
+                    right = mid - 1;
                 } else {
-                    left = middle + 1;
+                    // target 落在 [mid+1..right] 中
+                    left = mid + 1;
                 }
             }
-            // 右侧是有序数组
+            // mid 落在断崖右边，此时 nums[mid..right] 有序
             else {
-                if (nums[middle] < target && target <= nums[nums.length - 1]) {
-                    left = middle + 1;
+                if (target <= nums[right] && target > nums[mid]) {
+                    // target 落在 [mid+1..right] 中
+                    left = mid + 1;
                 } else {
-                    right = middle - 1;
+                    // target 落在 [left..mid-1] 中
+                    right = mid - 1;
                 }
             }
-
         }
+        // while 结束还没找到，说明 target 不存在
         return -1;
 
     }
-
 
     public int search(int[] nums, int target, int start, int end) {
         if (nums.length == 0) {

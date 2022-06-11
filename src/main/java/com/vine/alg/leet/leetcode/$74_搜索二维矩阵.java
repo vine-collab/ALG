@@ -25,61 +25,26 @@ public class $74_搜索二维矩阵 {
 
     public static void main(String[] args) {
         $74_搜索二维矩阵 s = new $74_搜索二维矩阵();
-        int[][] ints = {{1,2}
-        }
-                ;
-        boolean b = s.searchMatrix2(ints, 2);
+        int[][] ints = {{1, 2}};
+        boolean b = s.searchMatrix(ints, 2);
         System.out.println(b);
 
     }
 
 
     public boolean searchMatrix(int[][] matrix, int target) {
-        for (int[] ints : matrix) {
-            if (target == ints[0] || target == ints[ints.length - 1]) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int left = 0, right = m * n - 1;
+        while(left <= right) {
+            int centre = left + (right - left) / 2;
+            int mid = matrix[centre / n][centre % n];
+            if(mid == target) {
                 return true;
-            }
-            if (target > ints[0] || target < ints[ints.length - 1]) {
-                return search(ints, target);
-            }
-        }
-        return false;
-    }
-
-    public boolean search(int[] matrix, int target) {
-        int left = 0, right = matrix.length - 1;
-        while (left <= right) {
-            int middle = left + (right - left) / 2;
-            int m = matrix[middle];
-            if (m == target) {
-                return true;
-            } else if (m < target) {
-                left = m + 1;
+            } else if(mid < target){
+                left = centre + 1;
             } else {
-                right = m - 1;
-            }
-        }
-        return false;
-    }
-
-
-    public boolean searchMatrix2(int[][] matrix, int target) {
-        int M = matrix.length;
-        int N = matrix[0].length;
-
-
-        int left = 0, right = M * N - 1;
-        while (left <= right) {
-            int middle = left + (right - left) / 2;
-            int m = middle / N == 0 ? 0 : middle / N;
-            int n = middle % N == 0 ? 0 : middle % N;
-            int v = matrix[m][n];
-            if (v == target) {
-                return true;
-            } else if (v > target) {
-                right = middle - 1;
-            } else {
-                left = middle + 1;
+                right = centre - 1;
             }
         }
         return false;
