@@ -15,21 +15,25 @@ public class 下一个更大元素 {
 
     public static void main(String[] args) {
         下一个更大元素 x = new 下一个更大元素();
-       int[] integers = x.nextGreaterElement(Arrays.asList(2, 1, 2, 4, 3));
+        int[] integers = x.nextGreaterElement(Arrays.asList(2, 1, 2, 4, 3));
         System.out.println(JSON.toJSONString(integers));
     }
 
     int[] nextGreaterElement(List<Integer> nums) {
+        Stack<Integer> stack = new Stack<Integer>();
+
         int[] res = new int[nums.size()];
-        Stack<Integer> s = new Stack<>();
         for (int i = nums.size() - 1; i >= 0; i--) {
-            while (!s.isEmpty() && s.peek() <= nums.get(i)) {
-                s.pop();
+
+            while (!stack.isEmpty() && nums.get(i) >= stack.peek()) {
+                stack.pop();
             }
-            res[i] = s.isEmpty() ? -1 : s.pop();
-            s.push(nums.get(i));
+            int num = stack.isEmpty() ? -1 : stack.peek();
+            res[i] = num;
+            stack.push(nums.get(i));
         }
         return res;
+
     }
 
 }
