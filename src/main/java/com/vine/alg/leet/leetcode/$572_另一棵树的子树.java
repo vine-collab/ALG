@@ -97,15 +97,14 @@ public class $572_另一棵树的子树 {
 
 
     public boolean isSubtree2(TreeNode root, TreeNode subRoot) {
-        if(subRoot == null) {
-            return true;
-        }
         if (root == null) {
             return false;
         }
-        if(root.val != subRoot.val) {
-            return false;
+
+        if(subRoot == null) {
+            return true;
         }
+
         return isSameTree(root, subRoot) || isSubtree2(root.left, subRoot) || isSubtree2(root.right, subRoot);
 
     }
@@ -118,6 +117,11 @@ public class $572_另一棵树的子树 {
         if (s == null || t == null) {
             return false;
         }
+
+        if(s.val != t.val) {
+            return false;
+        }
+
         return isSameTree(s.left, t.left) && isSameTree(s.right, t.right);
     }
 
