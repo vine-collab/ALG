@@ -51,9 +51,10 @@ public class $797_所有可能的路径 {
         // 图的节点数
         int n = graph.length;
 
+        path.add(s);
         // 到达终点
         if(s == n - 1) {
-            path.addLast(s);
+            res.add(new ArrayList(path));
         }
 
         for (int v : graph[s]) {
