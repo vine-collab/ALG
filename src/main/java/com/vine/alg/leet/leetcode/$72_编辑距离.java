@@ -12,7 +12,7 @@ public class $72_编辑距离 {
 
     public static void main(String[] args) {
         $72_编辑距离 b = new $72_编辑距离();
-        int i = b.minDistance("intention", "execution");
+        int i = b.dp("intention", "execution");
         System.out.println(i);
     }
 
@@ -117,7 +117,7 @@ public class $72_编辑距离 {
                 if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1];
                 } else {
-                    dp[i][j] = Integer.min(Integer.min(dp[i - 1][j], dp[i - 1][j - 1]), dp[i][j - 1]);
+                    dp[i][j] = Integer.min(Integer.min(dp[i - 1][j] + 1, dp[i - 1][j - 1] + 1), dp[i][j - 1] + 1);
                 }
             }
         }
