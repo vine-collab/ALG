@@ -65,7 +65,7 @@ public class $518_零钱兑换II {
             for (int j = 1; j <= amount; j++) {
                 // 能装下
                 if(j - coins[i - 1] >= 0) {
-                    //          不使用第i个物品    使用（因为可以重复使用 i 保持不变）
+                    //          不使用第i个物品  使用（因为可以重复使用 i 保持不变）
                     dp[i][j] = dp[i - 1][j] + dp[i][j - coins[i - 1]];
                 }
                 // 装不下
