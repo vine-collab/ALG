@@ -9,7 +9,7 @@ public class 背包问题0_1 {
     public static void main(String[] args) {
         try {
             背包问题0_1 b = new 背包问题0_1();
-            int i = b.dp(3, 4, new int[]{2, 1, 3}, new int[]{4, 2, 3});
+            int i = b.dp1(3, 4, new int[]{2, 1, 3}, new int[]{4, 2, 3});
             System.out.println(i);
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,5 +46,26 @@ public class 背包问题0_1 {
         return dp[w][n];
 
     }
+
+
+    int dp1(int N, int W, int[] wt, int[] val){
+        // 对于前i个物品，当容量为j时，能装的最大价值为dp[i][j]，dp[i][0] = 0, dp[0][j] = 0;
+        int[][] dp = new int[N + 1][W + 1];
+        for (int i = 1; i <= N; i++) {
+            for (int j = 0; j <= W; j++) {
+                // 能装下
+                if(j - wt[i - 1] >= 0) {
+                    //                  装，                                          不装
+                    dp[i][j] = Integer.max(dp[i - 1][j - wt[i - 1]] + val[i - 1], dp[i - 1][j]);
+                }
+                // 装不下
+                else {
+                    dp[i][j] = dp[i - 1][j];
+                }
+            }
+        }
+        return dp[N][W];
+    }
+
 
 }
