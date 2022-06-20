@@ -13,7 +13,7 @@ import java.util.List;
 public class 括号生成 {
     public static void main(String[] args) {
         括号生成 k = new 括号生成();
-        List<String> strings = k.generateParenthesis(8);
+        List<String> strings = k.generateParenthesis(3);
         System.out.println(JSON.toJSONString(strings));
 
     }
