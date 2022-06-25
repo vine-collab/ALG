@@ -50,7 +50,7 @@ public class $26_删除有序数组中的重复项 {
 
     public static void main(String[] args) {
         $26_删除有序数组中的重复项 s = new $26_删除有序数组中的重复项();
-        int i = s.removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4});
+        int i = s.removeDuplicates1(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4});
         System.out.println(i);
     }
 
@@ -66,5 +66,24 @@ public class $26_删除有序数组中的重复项 {
         return slow + 1;
 
     }
+
+    public int removeDuplicates1(int[] nums) {
+        if(nums.length == 0) {
+            return 0;
+        }
+        int slow = 0, fast = 0;
+        while(fast < nums.length) {
+            if(nums[slow] == nums[fast]) {
+                fast++;
+            } else {
+                slow++;
+                nums[slow] = nums[fast];
+                fast++;
+            }
+        }
+        return slow+1;
+
+    }
+
 
 }

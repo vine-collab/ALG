@@ -35,8 +35,28 @@ public class $83_删除排序链表中的重复元素 {
             }
             fast = fast.next;
         }
+
         return head;
     }
+
+    public ListNode deleteDuplicates1(ListNode head) {
+        if(head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode slow = head, fast = head;
+        while (fast != null) {
+            if(slow.val != fast.val) {
+                slow.next = fast;
+                slow = slow.next;
+            }
+
+            fast = fast.next;
+        }
+        slow.next = null;
+        return head;
+    }
+
 }
 
 
