@@ -38,7 +38,7 @@ public class $673_最长递增子序列的个数 {
         int n = nums.length;
         int maxLength = 1;
         int ans = 0;
-        // 表示num[i] 结尾的递增子序列长度为 dp[i];
+        // 表示num[i] 结尾的最长递增子序列长度为 dp[i];
         int[] dp = new int[n];
         // 表示 num[i] 结尾最长子序列的个数
         int[] cnt = new int[n];
@@ -49,7 +49,7 @@ public class $673_最长递增子序列的个数 {
                 if (nums[i] <= nums[j]) {
                     continue;
                 }
-                if (dp[i] < dp[j] + 1) {
+                if (dp[i] < dp[j] + 1) { // 第一次计算到dp[i] 和dp[j]
                     dp[i] = dp[j] + 1;
                     cnt[i] = cnt[j];
                 } else if (dp[i] == dp[j] + 1) {
