@@ -54,12 +54,11 @@ public class $72_编辑距离 {
     }
 
     /*
-    表示s1[i,n]-> s2[j,n] 的最短距离
+    表示s1[0, i]-> s2[0, j] 的最短距离
     base case
     i = -1, or j = -1
 
     distance = min{插入，删除，替换}
-
      */
 
     Map<String, Integer> memo = new HashMap<>();

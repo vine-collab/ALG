@@ -63,7 +63,7 @@ public class $583_两个字符串的删除操作 {
     int dp(String s1, String s2) {
         int m = s1.length();
         int n = s2.length();
-        // s1[0,i] -> s2[0,j] 的最短编辑距离 为dp[i][j]
+        // s1[0,i-1] -> s2[0,j-1] 的最短编辑距离 为dp[i][j]
         int[][] dp = new int[m + 1][n + 1];
         for (int i = 0; i <= m; i++) {
             dp[i][0] = i;
@@ -78,6 +78,7 @@ public class $583_两个字符串的删除操作 {
                 if(s1.charAt(i - 1) == s2.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1];
                 } else {
+                    // 删除s1, 删除s2
                     dp[i][j] = Integer.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1);
                 }
 
