@@ -10,6 +10,8 @@ public class $5_最长回文子串 {
         $5_最长回文子串 z = new $5_最长回文子串();
         String babad = z.longestPalindrome("babd");
         System.out.println(babad);
+        String babad1 = z.longestPalindrome2("babd");
+        System.out.println(babad1);
     }
 
 
@@ -38,7 +40,7 @@ public class $5_最长回文子串 {
                         dp[i][j] = dp[i + 1][j - 1];
                     }
                 }
-                if(!dp[i][j]) {
+                if (!dp[i][j]) {
                     continue;
                 }
                 if (j - i + 1 > len) {
@@ -49,4 +51,30 @@ public class $5_最长回文子串 {
         }
         return s.substring(start, start + len);
     }
+
+    public String longestPalindrome2(String s) {
+        String res = "";
+        for (int i = 0; i < s.length(); i++) {
+            String palindrome = palindrome(s, i, i);
+            String palindrome1 = palindrome(s, i, i + 1);
+
+            res = res.length() > palindrome.length() ? res : palindrome;
+            res = res.length() > palindrome1.length() ? res : palindrome1;
+        }
+        return res;
+
+
+    }
+
+
+    String palindrome(String s, int l, int r) {
+        while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
+            l--;
+            r++;
+        }
+        return s.substring(l + 1, r - l + 1);
+
+    }
+
+
 }
