@@ -39,7 +39,7 @@ public class $322_零钱兑换 {
 
     public static void main(String[] args) {
         $322_零钱兑换 l = new $322_零钱兑换();
-        int i = l.dp(new int[]{2}, 3);
+        int i = l.dp(new int[]{1, 2, 5}, 11);
         System.out.println(i);
     }
 
@@ -76,7 +76,8 @@ public class $322_零钱兑换 {
         // 金额为i时，最小硬币个数为dp[i]
         int[] dp = new int[amount + 1];
         Arrays.fill(dp, amount + 1);
-
+        // base case
+        dp[0] = 0;
         for (int i = 0; i <= amount; i++) {
             for (int coin : coins) {
                 if(i - coin < 0) {
