@@ -3,16 +3,15 @@ package com.vine.alg.链表;
 import com.vine.alg.基本数据结构构造.ListNode;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author 阿季
  * @date 2022-05-14 4:00 PM
  */
 
-public class 反转链表 {
+public class 反转链表_递归_迭代 {
     public static void main(String[] args) {
-        反转链表 f = new 反转链表();
+        反转链表_递归_迭代 f = new 反转链表_递归_迭代();
 
         ListNode listNode = ListNode.createListNode(Arrays.asList(1, 2, 3));
         listNode.printf();
@@ -24,6 +23,12 @@ public class 反转链表 {
     }
 
 
+    /**
+     * 迭代
+     *
+     * @param head
+     * @return
+     */
     ListNode reverse(ListNode head) {
         ListNode pre = null, cur = head;
         while (cur != null) {
@@ -55,7 +60,7 @@ public class 反转链表 {
             ListNode temp = cur.next;
             cur.next = pre;
             cur = temp;
-            j ++;
+            j++;
 
         }
 
@@ -64,6 +69,9 @@ public class 反转链表 {
 
     }
 
+    /**
+     * 递归
+     */
     ListNode reverseRecursive(ListNode head) {
         if (head == null || head.next == null) {
             return head;
@@ -77,7 +85,6 @@ public class 反转链表 {
 
         return last;
     }
-
 
 
 }

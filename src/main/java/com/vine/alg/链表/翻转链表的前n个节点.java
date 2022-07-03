@@ -20,7 +20,7 @@ public class 翻转链表的前n个节点 {
 
     ListNode reverseN(ListNode head, int n) {
 
-        if(n == 1) {
+        if (n == 1) {
             successor = head.next;
             return head;
         }
@@ -28,6 +28,22 @@ public class 翻转链表的前n个节点 {
         // 以head.next为起点，翻转前n-1个节点
         ListNode listNode = reverseN(head.next, n - 1);
         head.next.next = head;
+        head.next = successor;
+        return listNode;
+
+    }
+
+
+    ListNode reverseN1(ListNode head, int n) {
+
+
+        if (n == 1) {
+            successor = head.next;
+            return head;
+        }
+        ListNode listNode = reverseN1(head, n - 1);
+        head.next.next = head;
+
         head.next = successor;
         return listNode;
 
