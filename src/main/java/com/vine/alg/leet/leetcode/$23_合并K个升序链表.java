@@ -4,7 +4,6 @@ import com.vine.alg.基本数据结构构造.ListNode;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.PriorityQueue;
 
 /**
@@ -41,8 +40,8 @@ public class $23_合并K个升序链表 {
     public static void main(String[] args) {
         $23_合并K个升序链表 h = new $23_合并K个升序链表();
         ListNode listNode = ListNode.createListNode(Arrays.asList(1, 4, 5));
-        ListNode listNode1 = ListNode.createListNode(Arrays.asList(1,3,4));
-        ListNode listNode2 = ListNode.createListNode(Arrays.asList(2,6));
+        ListNode listNode1 = ListNode.createListNode(Arrays.asList(1, 3, 4));
+        ListNode listNode2 = ListNode.createListNode(Arrays.asList(2, 6));
         ListNode[] listNodes = {listNode, listNode1, listNode2};
         ListNode listNode3 = h.mergeKLists(listNodes);
         listNode3.printf();
