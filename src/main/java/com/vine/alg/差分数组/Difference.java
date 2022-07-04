@@ -25,7 +25,7 @@ public class Difference {
     public void increment(int i, int j, int val) {
         diff[i] += val;
         if (j + 1 < diff.length) {
-            diff[j] -= val;
+            diff[j + 1] -= val;
         }
     }
 
