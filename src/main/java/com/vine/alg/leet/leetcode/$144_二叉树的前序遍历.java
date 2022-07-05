@@ -44,6 +44,8 @@ public class $144_二叉树的前序遍历 {
         res.add(root.val);
         res.addAll(preorderTraversal1(root.left));
         res.addAll(preorderTraversal1(root.right));
+
+
         return res;
     }
 }
