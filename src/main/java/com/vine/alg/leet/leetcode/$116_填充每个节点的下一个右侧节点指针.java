@@ -19,6 +19,25 @@ public class $116_填充每个节点的下一个右侧节点指针 {
     }
 
 
+    public Node connect1(Node root) {
+        if (root == null) {
+            return root;
+        }
+        traverse(root.left, root.right);
+        return root;
+    }
+
+    void traverse(Node root1, Node root2) {
+        if (root1 == null || root2 == null) {
+            return;
+        }
+        root1.next = root2;
+        traverse(root1.left, root1.right);
+        traverse(root2.left, root2.right);
+        traverse(root1.right, root2.left);
+
+    }
+
     public Node connect(Node root) {
         if (root == null) return null;
         Node cur = root;

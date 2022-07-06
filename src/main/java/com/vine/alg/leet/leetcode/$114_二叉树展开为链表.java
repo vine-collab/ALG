@@ -38,4 +38,31 @@ public class $114_二叉树展开为链表 {
 
     }
 
+
+
+    public void flatten1(TreeNode root) {
+
+        traverse(root);
+        root = dummy.right;
+
+    }
+
+    TreeNode dummy = new TreeNode(-2);
+
+    TreeNode p = dummy;
+
+    void traverse(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        // 前序位置
+        p.right = new TreeNode(root.val);
+        p.left = null;
+        p = p.right;
+
+        traverse(root.left);
+        traverse(root.right);
+    }
+
+
 }
