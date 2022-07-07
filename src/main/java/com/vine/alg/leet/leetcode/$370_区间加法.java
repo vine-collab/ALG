@@ -2,8 +2,6 @@ package com.vine.alg.leet.leetcode;
 
 import com.vine.alg.差分数组.Difference;
 
-import static com.sun.tools.doclint.Entity.sum;
-
 /**
  * @author 阿季
  * @date 2022-07-04 8:46 AM
