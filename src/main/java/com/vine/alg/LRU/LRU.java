@@ -1,7 +1,6 @@
 package com.vine.alg.LRU;
 
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 
 /**
  * @author 阿季
@@ -38,7 +37,7 @@ public class LRU {
 
         if (cache.size() >= this.cap) {
             Integer oldestKey = cache.keySet().iterator().next();
-            cache.remove(key);
+            cache.remove(oldestKey);
         }
 
         cache.put(key, value);
