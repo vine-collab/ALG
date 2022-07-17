@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class LFUCache {
 
-
     // key -> val 的映射
     Map<Integer, Integer> keyToVal;
 
@@ -49,6 +48,10 @@ public class LFUCache {
 
     // 将 key 和 val 存入缓存
     public void put(int key, int val) {
+        if (this.cap <= 0) {
+            return;
+        }
+
         if (keyToVal.containsKey(key)) {
             keyToVal.put(key, val);
             this.increaseFreq(key);
@@ -78,7 +81,7 @@ public class LFUCache {
         Integer deleteKey = keyList.iterator().next();
         /* 更新 FK 表 */
         keyList.remove(deleteKey);
-        if(keyList.isEmpty()) {
+        if (keyList.isEmpty()) {
             freqToKeys.remove(this.minFreq);
         }
         /* 更新 KV 表 */
@@ -92,7 +95,7 @@ public class LFUCache {
 
         Integer freq = keyToFreq.get(key);
         /* 更新 KF 表 */
-        keyToFreq.put(key, keyToFreq.getOrDefault(key, 0) + 1);
+        keyToFreq.put(key, freq + 1);
         /* 更新 FK 表 */
         // 将 key 从 freq 对应的列表中删除
         freqToKeys.get(freq).remove(key);
@@ -100,8 +103,8 @@ public class LFUCache {
         freqToKeys.putIfAbsent(freq + 1, new LinkedHashSet<>());
         freqToKeys.get(freq + 1).add(key);
         // 如果 freq 对应的列表空了，移除这个 freq
-        if(freqToKeys.get(key).isEmpty()) {
-            freqToKeys.remove(key);
+        if (freqToKeys.get(freq).isEmpty()) {
+            freqToKeys.remove(freq);
             // 如果这个 freq 恰好是 minFreq，更新 minFreq
             if (freq == this.minFreq) {
                 this.minFreq++;
