@@ -2,6 +2,7 @@ package com.vine.alg.leet.leetcode;
 
 import com.vine.alg.基本数据结构构造.ListNode;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -12,7 +13,9 @@ import java.util.Stack;
 public class $206_反转链表 {
     public static void main(String[] args) {
         $206_反转链表 f = new $206_反转链表();
-
+        ListNode listNode = ListNode.createListNode(Arrays.asList(1, 2, 3, 4, 5));
+        ListNode listNode1 = f.reverseList1(listNode);
+        listNode1.printf();
     }
 
 
@@ -30,6 +33,22 @@ public class $206_反转链表 {
             cur = cur.next;
         }
         return dummy.next;
+
+    }
+
+
+    public ListNode reverseList1(ListNode head) {
+        if(head == null || head.next == null) {
+            return head;
+        }
+        ListNode cur = head, pre = null, temp = null;
+        while(cur != null) {
+            temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
+        }
+        return pre;
 
     }
 

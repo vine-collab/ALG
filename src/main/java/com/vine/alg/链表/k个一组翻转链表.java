@@ -17,20 +17,24 @@ public class k个一组翻转链表 {
 
     }
 
-    ListNode reverseGroup(ListNode head, int k) {
-        if (head == null) {
-            return null;
+    public ListNode reverseGroup(ListNode head, int k) {
+        if (head == null || head.next == null) {
+            return head;
         }
         ListNode a = head, b = head;
         for (int i = 0; i < k; i++) {
+            // 不足k个了
             if (b == null) {
                 return head;
             }
             b = b.next;
         }
-        ListNode reverse = reverse(a, b);
-        a.next = reverseGroup(b, k);
-        return reverse;
+        // 反转以[a, b) a.next 成为链表尾节点
+        ListNode newHead = this.reverse(a, b);
+        // 反转下k个，a.next 指向 k个的头节点
+        a.next = this.reverseGroup(b, k);
+        return newHead;
+
 
     }
 
@@ -38,12 +42,13 @@ public class k个一组翻转链表 {
         ListNode pre = null, cur = a, temp;
         while (cur != b) {
             temp = cur.next;
-            cur.next=pre;
+            cur.next = pre;
             pre = cur;
             cur = temp;
         }
 
         return pre;
     }
+
 
 }
