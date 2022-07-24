@@ -20,7 +20,7 @@ public class $5_最长回文子串 {
      * base case
      * 1、单个字符，对角线为true
      * <p>
-     * 递推重点(0, n - 1)
+     * 递推终点(0, n - 1)
      */
     public String longestPalindrome(String s) {
 
@@ -30,7 +30,7 @@ public class $5_最长回文子串 {
             dp[i][i] = true;
         }
         for (int i = n - 1; i >= 0; i--) {
-            for (int j = i; j < n; j++) {
+            for (int j = i + 1; j <= n; j++) {
                 if (s.charAt(i) != s.charAt(j)) {
                     dp[i][j] = false;
                 } else {
@@ -55,8 +55,8 @@ public class $5_最长回文子串 {
     public String longestPalindrome2(String s) {
         String res = "";
         for (int i = 0; i < s.length(); i++) {
-            String s1 = longest(s, i, i);
-            String s2 = longest(s, i, i + 1);
+            String s1 = palindrome(s, i, i);
+            String s2 = palindrome(s, i, i + 1);
             res = res.length() > s1.length() ? res : s1;
             res = res.length() > s2.length() ? res : s2;
         }
@@ -66,7 +66,8 @@ public class $5_最长回文子串 {
 
     }
 
-    String longest(String s, int l, int r) {
+    String palindrome(String s, int l, int r) {
+        // 防止索引越界
         while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
             l--;
             r++;
