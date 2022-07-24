@@ -34,6 +34,7 @@ public class $236_二叉树的最近公共祖先 {
         TreeNode left = lowestCommonAncestor(root.left, p, q);
 
         TreeNode right = lowestCommonAncestor(root.right, p, q);
+
         // 情况1 如果p和q都在以root为根的树中，那么left和right一定分别是p和q（从 base case 看出来的）。
         if (left != null && right != null) {
             return root;
