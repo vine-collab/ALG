@@ -13,7 +13,7 @@ public class $42_接雨水 {
      */
     public static void main(String[] args) {
         $42_接雨水 j = new $42_接雨水();
-        int trap = j.trap(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1});
+        int trap = j.trap2(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1});
         System.out.println(trap);
     }
 
@@ -60,6 +60,27 @@ public class $42_接雨水 {
         }
         return res;
 
+    }
+
+
+    public int trap2(int[] height) {
+        int maxL = 0, maxR = 0;
+        int left = 0, right = height.length - 1;
+        int res = 0;
+        while(left <= right) {
+            maxL = Integer.max(maxL, height[left]);
+            maxR = Integer.max(maxR, height[right]);
+
+            if(maxL < maxR) {
+                res += (maxL - height[left]);
+                left++;
+            } else {
+                res += (maxR - height[right]);
+                right--;
+            }
+
+        }
+        return res;
     }
 }
 
