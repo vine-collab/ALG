@@ -16,8 +16,12 @@ public class 翻转链表的前n个节点 {
         f.reverseN(ListNode.createListNode(Arrays.asList(1, 3, 4, 5, 6, 7)), 3).printf();
     }
 
+    // 后驱节点，即：第n+1个节点
     ListNode successor = null;
 
+    /**
+     * 将链表的前 n 个节点反转（n <= 链表长度）
+     */
     ListNode reverseN(ListNode head, int n) {
 
         if (n == 1) {
@@ -28,6 +32,7 @@ public class 翻转链表的前n个节点 {
         // 以head.next为起点，翻转前n-1个节点
         ListNode listNode = reverseN(head.next, n - 1);
         head.next.next = head;
+        // 让反转之后的 head 节点和后面的节点连起来
         head.next = successor;
         return listNode;
 

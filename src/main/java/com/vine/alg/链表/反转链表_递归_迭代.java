@@ -70,7 +70,9 @@ public class 反转链表_递归_迭代 {
     }
 
     /**
-     * 递归
+     * 递归：对于递归算法，最重要的就是明确递归函数的定义。具体来说，我们的 reverse 函数定义是这样的：
+     * <p>
+     * 输入一个节点 head，将「以 head 为起点」的链表反转，并返回反转之后的头结点。
      */
     ListNode reverseRecursive(ListNode head) {
         if (head == null || head.next == null) {
@@ -80,7 +82,7 @@ public class 反转链表_递归_迭代 {
         ListNode last = reverseRecursive(head.next);
         //翻转当前节点指针
         head.next.next = head;
-        //  切断指针
+        //  当链表递归反转之后，新的头结点是 last，而之前的 head 变成了最后一个节点，别忘了链表的末尾要指向 null
         head.next = null;
 
         return last;
