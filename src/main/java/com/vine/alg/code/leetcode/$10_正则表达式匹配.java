@@ -52,14 +52,16 @@ public class $10_正则表达式匹配 {
             判断 p[j...] 是否能匹配空串 即 x*y*z* 格式 成对出现
      */
     boolean dp(String s, String p, int i, int j) {
-        if(j == p.length()) {
+        if (j == p.length()) {
             return i == s.length();
         }
 
         if (i == s.length()) {
+            // 如果能匹配空串，一定是字符和 * 成对儿出现
             if ((p.length() - j) % 2 != 0) {
                 return false;
             }
+            // 检查是否为 x*y*z* 这种形式
             while (j + 1 < p.length()) {
                 if (p.charAt(j + 1) != '*') {
                     return false;
@@ -70,22 +72,24 @@ public class $10_正则表达式匹配 {
 
         }
 
-
+        // i和j匹配
         if (s.charAt(i) == p.charAt(j) || p.charAt(j) == '.') {
             if (j + 1 < p.length() && p.charAt(j + 1) == '*') {
-                // 匹配0次，或者 多次
+                //                 // // 有 * 通配符,匹配0 次， 或者多次j + 2) // 匹配0次，p指针 +2，s指正不变
                 return dp(s, p, i, j + 2) // 匹配0次，p指针 +2，s指正不变
                         || dp(s, p, i + 1, j); // 匹配多次，p指针不变，s指针+1
             } else {
-                // 当前匹配上了，指针后移
+                // 无 * 通配符，老老实实匹配 1 次
                 return dp(s, p, i + 1, j + 1);
             }
-        } else {
+        }
+        // i和j匹配不上
+        else {
             if (j + 1 < p.length() && p.charAt(j + 1) == '*') {
-                // 只能匹配0次
+                // 通配符匹配0次
                 return dp(s, p, i, j + 2); // 匹配0次，p指针 +2，s指正不变
             } else {
-                // 没有 * 无法匹配
+                // 无 * 通配符，无法匹配
                 return false;
             }
 
