@@ -17,7 +17,7 @@ public class $226_翻转二叉树 {
         $226_翻转二叉树 f = new $226_翻转二叉树();
     }
 
-    // z子问题：返回root的反转树
+    // 子问题：返回root的反转树
 
     public TreeNode invertTree(TreeNode root) {
 

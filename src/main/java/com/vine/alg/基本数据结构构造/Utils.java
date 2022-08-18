@@ -1,0 +1,100 @@
+package com.vine.alg.基本数据结构构造;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * @author 阿季
+ * @date 2022-08-16 9:49 PM
+ */
+
+public class Utils {
+
+    public static int[] toIntArr1(String star) {
+        List<Integer> lists = JSON.parseObject(star, new TypeReference<List<Integer>>() {
+        });
+        return lists.stream().mapToInt(Integer::intValue).toArray();
+
+    }
+
+
+    public static int[][] toIntArr2(String star) {
+        List<List<Integer>> lists = JSON.parseObject(star, new TypeReference<List<List<Integer>>>() {
+        });
+
+        int[][] ints = new int[lists.size()][];
+
+        for (int i = 0; i < lists.size(); i++) {
+            ints[i] = lists.get(i).stream().mapToInt(Integer::intValue).toArray();
+        }
+        return ints;
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
