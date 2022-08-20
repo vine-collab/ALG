@@ -5,6 +5,7 @@ import com.alibaba.fastjson.TypeReference;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author 阿季
@@ -18,6 +19,14 @@ public class Utils {
         });
         return lists.stream().mapToInt(Integer::intValue).toArray();
 
+    }
+
+    public static int[]  splitToIntArr1(String star) {
+        return Arrays.stream(star.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .mapToInt(Integer::intValue)
+                .toArray();
     }
 
 
