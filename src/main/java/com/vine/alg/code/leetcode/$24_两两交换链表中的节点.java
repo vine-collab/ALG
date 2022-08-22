@@ -3,6 +3,9 @@ package com.vine.alg.code.leetcode;
 import com.vine.alg.基本数据结构构造.ListNode;
 import com.vine.alg.基本数据结构构造.Utils;
 
+import java.util.List;
+import java.util.logging.Level;
+
 /**
  * @author 阿季
  * @date 2022-08-20 11:40 AM
@@ -27,19 +30,42 @@ public class $24_两两交换链表中的节点 {
     public static void main(String[] args) {
         $24_两两交换链表中的节点 l = new $24_两两交换链表中的节点();
 
-        l.swapPairs(ListNode.createListNode(Utils.splitToIntArr1("1,2,3,4"))).printf();
+        l.swapPairs(ListNode.createListNode(Utils.splitToIntArr1("1"))).printf();
     }
 
 
     public ListNode swapPairs(ListNode head) {
-        if(head == null || head.next == null) {
+        if (head == null || head.next == null) {
             return head;
         }
+        ListNode a = head, b = head;
+        for (int i = 0; i < 2; i++) {
+            b = b.next;
+        }
 
+        ListNode node = this.reverse(a, b);
+        ListNode listNode = swapPairs(b);
 
-        return head;
+        a.next = listNode;
+        return node;
     }
 
+
+    /**
+     * 反转[a, b) 之间元素
+     */
+    ListNode reverse(ListNode a, ListNode b) {
+        ListNode cur = a, pre = null, temp;
+        while (cur != b) {
+            temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
+        }
+
+        return pre;
+
+    }
 
 }
 
