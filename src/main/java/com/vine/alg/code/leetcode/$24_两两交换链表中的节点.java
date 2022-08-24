@@ -3,9 +3,6 @@ package com.vine.alg.code.leetcode;
 import com.vine.alg.基本数据结构构造.ListNode;
 import com.vine.alg.基本数据结构构造.Utils;
 
-import java.util.List;
-import java.util.logging.Level;
-
 /**
  * @author 阿季
  * @date 2022-08-20 11:40 AM

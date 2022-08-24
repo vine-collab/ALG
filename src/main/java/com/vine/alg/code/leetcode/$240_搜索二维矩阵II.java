@@ -1,11 +1,6 @@
 package com.vine.alg.code.leetcode;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
 import com.vine.alg.基本数据结构构造.Utils;
-
-import javax.rmi.CORBA.Util;
-import java.util.List;
 
 /**
  * @author 阿季

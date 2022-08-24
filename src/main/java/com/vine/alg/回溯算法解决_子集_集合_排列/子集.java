@@ -2,9 +2,11 @@ package com.vine.alg.回溯算法解决_子集_集合_排列;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import org.omg.PortableInterceptor.INACTIVE;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author 阿季

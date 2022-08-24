@@ -2,7 +2,10 @@ package com.vine.alg.code.topcode;
 
 import com.alibaba.fastjson.JSON;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author 阿季

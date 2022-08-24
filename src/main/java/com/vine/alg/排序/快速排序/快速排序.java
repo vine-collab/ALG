@@ -1,9 +1,9 @@
-package com.vine.alg.快速排序;
+package com.vine.alg.排序.快速排序;
 
-import java.util.Arrays;
+import com.alibaba.fastjson.JSON;
+import com.vine.alg.基本数据结构构造.Utils;
+
 import java.util.Random;
-
-import static org.apache.commons.lang3.ArrayUtils.swap;
 
 /**
  * @author 阿季
@@ -14,31 +14,33 @@ public class 快速排序 {
 
     public static void main(String[] args) {
         快速排序 k = new 快速排序();
-
+        int[] nums = Utils.splitToIntArr1("5,2,3,1");
+        k.sort(nums);
+        System.out.println(JSON.toJSONString(nums));
     }
 
 
-    void sort(int[] nums) {
-        // 打乱数组
-        this.shuffle(nums);
-
+    public static void sort(int[] nums) {
+        // 为了避免出现耗时的极端情况，先随机打乱
+        shuffle(nums);
+        // 排序整个数组（原地修改）
+        sort(nums, 0, nums.length - 1);
     }
 
-    void sort(int[] nums, int l, int h) {
-        if (l >= h) {
+    private static void sort(int[] nums, int lo, int hi) {
+        if (lo >= hi) {
             return;
         }
-
-        // 对[l, h] 进行切分
+        // 对 nums[lo..hi] 进行切分
         // 使得 nums[lo..p-1] <= nums[p] < nums[p+1..hi]
-        int p = this.partition(nums, l, h);
-        this.sort(nums, l, p - 1);
-        this.sort(nums, p + 1, h);
+        int p = partition(nums, lo, hi);
 
+        sort(nums, lo, p - 1);
+        sort(nums, p + 1, hi);
     }
 
     // 对 nums[lo..hi] 进行切分
-    int partition(int[] nums, int lo, int hi) {
+    private static int partition(int[] nums, int lo, int hi) {
         int pivot = nums[lo];
         // 关于区间的边界控制需格外小心，稍有不慎就会出错
         // 我这里把 i, j 定义为开区间，同时定义：
@@ -55,25 +57,20 @@ public class 快速排序 {
                 j--;
                 // 此 while 结束时恰好 nums[j] <= pivot
             }
-
             // 此时 [lo, i) <= pivot && (j, hi] > pivot
 
             if (i >= j) {
                 break;
             }
             swap(nums, i, j);
-
         }
         // 将 pivot 放到合适的位置，即 pivot 左边元素较小，右边元素较大
         swap(nums, lo, j);
         return j;
-
-
     }
 
-
     // 洗牌算法，将输入的数组随机打乱
-    private void shuffle(int[] nums) {
+    private static void shuffle(int[] nums) {
         Random rand = new Random();
         int n = nums.length;
         for (int i = 0; i < n; i++) {
@@ -83,6 +80,12 @@ public class 快速排序 {
         }
     }
 
+    // 原地交换数组中的两个元素
+    private static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
 
 }
 
