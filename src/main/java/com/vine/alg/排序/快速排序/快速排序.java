@@ -14,7 +14,7 @@ public class 快速排序 {
 
     public static void main(String[] args) {
         快速排序 k = new 快速排序();
-        int[] nums = Utils.splitToIntArr1("5,2,3,1");
+        int[] nums = Utils.splitToIntArr1("5,2,3,7,1");
         k.sort(nums);
         System.out.println(JSON.toJSONString(nums));
     }
@@ -85,6 +85,31 @@ public class 快速排序 {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
+    }
+
+
+    private int partition1(int[] nums, int lo, int hi) {
+        int pivot = nums[lo];
+        int i = lo + 1, j = hi;
+        while (i <= j) {
+            while (i < hi && nums[i] <= pivot) {
+                i++;
+                // 结束之后，nums[i] > pivot
+            }
+            while (j > lo && nums[j] > pivot) {
+                j--;
+                // 结束之后，nums[j] <= pivot
+            }
+            // 此时 [lo, i) <= pivot && (j, hi] > pivot
+
+            if(i >= j) {
+                break;
+            }
+            swap(nums, i, j);
+        }
+        swap(nums, lo, j);
+        return j;
+
     }
 
 }
