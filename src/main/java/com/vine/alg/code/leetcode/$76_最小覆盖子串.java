@@ -62,7 +62,7 @@ public class $76_最小覆盖子串 {
                 }
             }
 
-            while (valid == t.length()) {
+            while (valid == need.size()) {
                 if (right - left < len) {
                     start = left;
                     len = right - left;
