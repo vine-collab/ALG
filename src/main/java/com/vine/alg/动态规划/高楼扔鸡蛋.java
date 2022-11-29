@@ -37,7 +37,8 @@ public class 高楼扔鸡蛋 {
         for (int i = 1; i <= n; i++) {
 
             // 最坏情况下，取两者最大 // 在第i楼扔了一次
-            int maxi = Integer.max(superEggDrop(k - 1, i - 1), // 碎 从i下面楼层开始扔
+            int maxi = Integer.max(
+                    superEggDrop(k - 1, i - 1), // 碎 从i下面楼层开始扔
                     superEggDrop(k, n - i) // 没碎 从i上面楼层开始扔
             ) + 1;
 
