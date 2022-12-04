@@ -55,4 +55,30 @@ public class 翻转链表的前n个节点 {
     }
 
 
+
+
+    /**
+     * 反转以head为头结点链表的前n个节点
+     */
+    ListNode reverseN11(ListNode head, int n) {
+        if(n == 1) {
+            successor = head.next;
+            return head;
+        }
+        ListNode last = reverseN11(head.next, n - 1);
+        head.next.next = head;
+        head.next = successor;
+        return last;
+
+
+    }
+
+
+
+
+
+
+
+
+
 }
