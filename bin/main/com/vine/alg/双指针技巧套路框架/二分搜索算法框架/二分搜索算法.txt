@@ -1,0 +1,22 @@
+
+
+二分搜索问题：至于给mid加还是减，while循环里面用<=还是<
+二分法搜索框架：
+    int binarySearch(int[] nums, int target) {
+        int left = 0, right = ...;
+        while(...) {
+            int mid = left + (right - left) / 2;
+            if(nums[mid] == target) {
+                ...
+            } else if (num[mid] < right) {
+                left = ...;
+            } else if (num[mid] > right) {
+                right = ...;
+            }
+        }
+        return ...;
+    }
+
+二分搜索的一个技巧：
+1、不要出现else， 而是把所有的情况用else if写清楚，这样可以更清楚的展示所有细节。
+2、计算mid时要防止*整型*溢出。（right + left）/ 2可能会导致整型溢出， 而 left + （right - left）/ 2 则不会出现溢出现象。
