@@ -9,7 +9,7 @@ public class $14_最长公共前缀 {
 
     public static void main(String[] args) {
         $14_最长公共前缀 z = new $14_最长公共前缀();
-        String s = z.longestCommonPrefix(new String[]{"flower", "flow", "flight"});
+        String s = z.longestCommonPrefix(new String[]{"ab", "a"});
         System.out.println(s);
     }
 
