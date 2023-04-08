@@ -30,7 +30,7 @@ public class $174_地下城游戏 {
      */
     public static void main(String[] args) {
         $174_地下城游戏 d = new $174_地下城游戏();
-        int i = d.calculateMinimumHP(new int[][]{{-2, -3, 3}, {-5, -10, 1}, {10, 30, -5}});
+        int i = d.calculateMinimumH1P(new int[][]{{-2, -3, 3}, {-5, -10, 1}, {10, 30, -5}});
         System.out.println(i);
     }
 
@@ -77,6 +77,34 @@ public class $174_地下城游戏 {
 
     }
 
+
+
+
+    public int calculateMinimumH1P(int[][] dungeon) {
+        int m = dungeon.length;
+        int n = dungeon[0].length;
+        // dp(i, j) 表示从i，j到达 右下角的最小生命值为dp
+        int[][] dp = new int[m][n];
+        dp[m - 1][n - 1] = dungeon[m - 1][n - 1] >= 0 ? 1 : -dungeon[m - 1][n - 1] + 1;
+        for(int i = m - 2; i >= 0; i--) {
+            int d = dp[i + 1][n - 1] - dungeon[i][n - 1];
+            dp[i][n - 1] = d <= 0 ? 1 : d;
+        }
+
+        for(int j = n - 2; j >= 0; j--) {
+            int d = dp[m - 1][j + 1] - dungeon[m - 1][j];
+            dp[m - 1][j] = d <= 0 ? 1 : d;
+        }
+
+        for(int i = m - 2; i >= 0; i--) {
+            for(int j = n - 2; j >= 0; j--) {
+                int d = Math.min(dp[i + 1][j], dp[i][j + 1]) - dungeon[i][j];
+                dp[i][j] = d <= 0 ? 1 : d;
+            }
+        }
+
+        return dp[0][0];
+    }
 
 }
 
