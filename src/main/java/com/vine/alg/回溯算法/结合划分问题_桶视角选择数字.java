@@ -4,6 +4,7 @@ import com.vine.alg.基本数据结构构造.Utils;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -18,6 +19,7 @@ public class 结合划分问题_桶视角选择数字 {
         boolean b = z.canPartitionKSubsets(Utils.splitToIntArr1("4, 3, 2, 3, 5, 2, 1"), 4);
         System.out.println(b);
     }
+
 
 
     // 以数字视角放到n个集合里面

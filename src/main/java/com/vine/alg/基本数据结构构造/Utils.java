@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 public class Utils {
 
+
     public static int[] toIntArr1(String star) {
         List<Integer> lists = JSON.parseObject(star, new TypeReference<List<Integer>>() {
         });
