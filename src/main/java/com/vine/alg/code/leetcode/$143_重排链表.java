@@ -16,7 +16,7 @@ public class $143_重排链表 {
     public static void main(String[] args) {
         $143_重排链表 c = new $143_重排链表();
 
-        ListNode listNode = ListNode.createListNode(Arrays.asList(1, 2, 3, 4, 5));
+        ListNode listNode = ListNode.createListNode(Arrays.asList(1, 2, 3, 4));
         c.reorderList(listNode);
         listNode.printf();
     }

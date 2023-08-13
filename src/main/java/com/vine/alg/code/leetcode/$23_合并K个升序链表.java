@@ -74,6 +74,34 @@ public class $23_合并K个升序链表 {
 
     }
 
+
+
+
+    public ListNode mergeKLists1(ListNode[] lists) {
+        ListNode dummy = new ListNode(), p = dummy;
+        if(lists == null) {
+            return null;
+        }
+        PriorityQueue<ListNode> q = new PriorityQueue<>((a, b) -> a.val - b.val);
+        for(ListNode list : lists) {
+            if(list == null) {
+                continue;
+            }
+            q.offer(list);
+        }
+
+        while(!q.isEmpty()) {
+            ListNode cur = q.poll();
+            p.next = cur;
+            p = p.next;
+            if(cur.next != null) {
+                q.offer(cur.next);
+            }
+        }
+
+        return dummy.next;
+    }
+
 }
 
 

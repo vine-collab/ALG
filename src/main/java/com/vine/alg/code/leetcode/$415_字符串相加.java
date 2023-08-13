@@ -35,12 +35,12 @@ public class $415_字符串相加 {
      */
     public static void main(String[] args) {
         $415_字符串相加 z = new $415_字符串相加();
-        String s = z.addStrings1("6", "501");
+        String s = z.addStrings("456", "77");
         System.out.println(s);
     }
 
 
-    public String addStrings(String num1, String num2) {
+    public String addStrings2(String num1, String num2) {
         int l1 = num1.length() - 1;
         int l2 = num2.length() - 1;
         StringBuilder res = new StringBuilder();
@@ -98,6 +98,54 @@ public class $415_字符串相加 {
         return res.reverse().toString();
 
     }
+
+
+
+    public String addStrings(String num1, String num2) {
+        StringBuilder res = new StringBuilder();
+        int l1 = num1.length() - 1;
+        int l2 = num2.length() - 1;
+
+        int carry = 0;
+        while(l1 != -1 && l2 != -1) {
+            int n1 = num1.charAt(l1) - '0';
+            int n2 = num2.charAt(l2) - '0';
+            int sum = n1 + n2 + carry;
+            res.append(sum % 10);
+            carry = sum / 10;
+            l1--;
+            l2--;
+        }
+
+        if(l1 != -1) {
+            while(l1 != -1) {
+                int n2 = num1.charAt(l1) - '0';
+                int sum = carry + n2;
+                res.append(sum % 10);
+                carry = sum / 10;
+                l1--;
+            }
+
+        } else {
+            while(l2 != -1) {
+                int n2 = num2.charAt(l2) - '0';
+                int sum = carry + n2;
+                res.append(sum % 10);
+                carry = sum / 10;
+                l2--;
+            }
+
+        }
+
+        if(carry != 0){
+            res.append(carry);
+
+        }
+
+        return res.reverse().toString();
+    }
+
+
 
 
 }

@@ -1,5 +1,7 @@
 package com.vine.alg.code.leetcode;
 
+import com.vine.alg.基本数据结构构造.Utils;
+
 /**
  * @author 阿季
  * @date 2022-07-28 9:36 PM
@@ -12,6 +14,11 @@ public class $88_合并两个有序数组 {
      */
     public static void main(String[] args) {
         $88_合并两个有序数组 h = new $88_合并两个有序数组();
+
+        int[] ints = Utils.splitToIntArr1("0");
+        int[] ints1 = Utils.splitToIntArr1("1");
+        h.merge(ints, 0, ints1, 1);
+
     }
 
     public void merge(int[] nums1, int m, int[] nums2, int n) {

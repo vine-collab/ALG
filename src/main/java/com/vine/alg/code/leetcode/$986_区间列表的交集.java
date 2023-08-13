@@ -55,6 +55,7 @@ public class $986_区间列表的交集 {
     }
 
 
+
     public int[][] intervalIntersection2(int[][] firstList, int[][] secondList) {
         int i = 0, j = 0;
         List<List<Integer>> res = new ArrayList<>();
