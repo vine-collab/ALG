@@ -1,5 +1,7 @@
 package com.vine.alg.code.leetcode;
 
+import javafx.scene.control.Skin;
+
 import java.util.Arrays;
 import java.util.Stack;
 
@@ -42,6 +44,31 @@ public class $32_最长有效括号 {
         return Arrays.stream(dp).max().getAsInt();
 
     }
+
+
+    public int longestValidParentheses1(String s) {
+        //dp(i) 表示以s(i - 1) 结尾的字符串中最长有效括号的长度
+        int[] dp = new int[s.length() + 1];
+        Stack<Integer> stk = new Stack<>();
+
+        for(int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == '(') {
+                stk.push(i);
+                dp[i + 1] = 0; // 左括号不能匹配
+            } else {
+                // 遇到右括号
+                if(stk.isEmpty()) { //无法匹配
+                    dp[i + 1] = 0;
+                } else {
+                    Integer leftIdx = stk.pop();
+                    int len = 1 + i - leftIdx; // 当前匹配的括号的长度
+                    dp[i + 1] = len + dp[leftIdx]; // 加上匹配之前的那个字符串结尾的长度
+                }
+            }
+        }
+        return Arrays.stream(dp).max().getAsInt();
+    }
+
 
 }
 

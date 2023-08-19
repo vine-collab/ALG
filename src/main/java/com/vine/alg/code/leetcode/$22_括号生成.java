@@ -3,6 +3,7 @@ package com.vine.alg.code.leetcode;
 import com.alibaba.fastjson.JSON;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -33,7 +34,7 @@ public class $22_括号生成 {
      */
     public static void main(String[] args) {
         $22_括号生成 k = new $22_括号生成();
-        List<String> strings = k.generateParenthesis(3);
+        List<String> strings = k.generateParenthesis1(3);
         System.out.println(JSON.toJSONString(strings));
 
     }
@@ -47,7 +48,7 @@ public class $22_括号生成 {
 
     void backtrack(int n, String cur) {
         if (cur.length() == 2 * n) {
-            if (isValid(cur)) {
+            if (valid(cur)) {
                 res.add(new String(cur));
             }
             return;
@@ -72,6 +73,49 @@ public class $22_括号生成 {
 
         }
         return s.isEmpty();
+    }
+
+
+    public List<String> generateParenthesis1(int n) {
+        this.n = n;
+        backtrack(new LinkedList<String>());
+        return res;
+    }
+
+    int n;
+    void backtrack(LinkedList<String> track) {
+        if(track.size() == 2 * n) {
+            String join = String.join("", track);
+            if(valid(join)) {
+                res.add(join);
+            }
+            return;
+        }
+
+        track.addLast(")");
+        backtrack(track);
+        track.removeLast();
+        track.addLast("(");
+        backtrack(track);
+        track.removeLast();
+
+
+    }
+    boolean valid(String s) {
+        int left = 0, right = 0;
+
+        for(char c : s.toCharArray()) {
+            if(c == ')') {
+                right++;
+            }
+            if(c == '(') {
+                left++;
+            }
+            if(right > left) {
+                return false;
+            }
+        }
+        return left == right;
     }
 
 

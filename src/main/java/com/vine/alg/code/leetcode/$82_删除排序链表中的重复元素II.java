@@ -25,8 +25,8 @@ public class $82_删除排序链表中的重复元素II {
      */
     public static void main(String[] args) {
         $82_删除排序链表中的重复元素II s = new $82_删除排序链表中的重复元素II();
-        ListNode listNode = ListNode.createListNode(Arrays.asList(1, 1, 2,3,5));
-        ListNode listNode1 = s.deleteDuplicates2(listNode);
+        ListNode listNode = ListNode.createListNode(Arrays.asList(1,1));
+        ListNode listNode1 = s.deleteDuplicates(listNode);
         ListNode.printf(listNode1);
     }
 

@@ -2,7 +2,9 @@ package com.vine.alg.code.leetcode;
 
 import com.alibaba.fastjson.JSON;
 
+import javax.swing.table.TableRowSorter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,7 +20,7 @@ public class $93_复原IP地址 {
      */
     public static void main(String[] args) {
         $93_复原IP地址 f = new $93_复原IP地址();
-        List<String> strings = f.restoreIpAddresses("0000");
+        List<String> strings = f.restoreIpAddresses("25525511135");
         System.out.println(JSON.toJSONString(strings));
     }
 
@@ -28,7 +30,8 @@ public class $93_复原IP地址 {
      * 在搜索的过程中，如果我们已经得到了全部的 44 段 IP 地址（即 part=4）
      */
     public List<String> restoreIpAddresses(String s) {
-        this.dfs(s, 0, 0);
+//        this.dfs(s, 0, 0);
+        backtrack(s, 0, new LinkedList<>());
         return res;
 
     }
@@ -76,6 +79,58 @@ public class $93_复原IP地址 {
             }
         }
         res.add(ipAddr.toString());
+    }
+
+
+    ////////////**//////////////////
+
+
+    void backtrack(String s, int start, LinkedList<String> track) {
+        if (start == s.length() && track.size() == 4) {
+            res.add(String.join(".", track));
+            return;
+        }
+
+        for (int i = start; i < s.length(); i++) {
+            if (!valid(s, start, i)) {
+                continue;
+            }
+
+            if (track.size() > 4) {
+                break;
+            }
+
+            track.addLast(s.substring(start, i + 1));
+            backtrack(s, i + 1, track);
+            track.removeLast();
+
+        }
+
+    }
+
+    boolean valid(String s, int start, int end) {
+        int length = end - start + 1;
+        if (length == 0 || length > 3) {
+            return false;
+        }
+        if (length == 1) {
+            return true;
+        }
+
+        //有前导0
+        if (s.charAt(start) == '0') {
+            return false;
+        }
+
+        if (length <= 2) {
+            return true;
+        }
+
+        if (Integer.parseInt(s.substring(start, start + length)) > 255) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 

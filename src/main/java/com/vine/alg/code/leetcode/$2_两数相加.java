@@ -60,6 +60,22 @@ public class $2_两数相加 {
 
     }
 
+    public ListNode addTwoNumbers1(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(), p = dummy;
+        int reminder = 0;
+        while(l1 != null || l2 != null || reminder != 0) {
+            int a = l1 == null ? 0 : l1.val;
+            int b = l2 == null ? 0 : l2.val;
+            int sum = a + b + reminder;
+            p.next = new ListNode(sum % 10);
+            reminder = sum / 10;
+            if(l1 != null) l1 = l1.next;
+            if(l2 != null) l2 = l2.next;
+            p = p.next;
+        }
+        return dummy.next;
+    }
+
 
     /*
         思路：342 + 465 每位相加只需要关注，个位：作为当前位的结果记录下来，十位作为下一个循环的起始结果累加

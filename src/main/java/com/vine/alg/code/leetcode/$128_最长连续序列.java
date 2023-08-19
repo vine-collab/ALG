@@ -3,6 +3,7 @@ package com.vine.alg.code.leetcode;
 import com.vine.alg.基本数据结构构造.Utils;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -45,7 +46,7 @@ public class $128_最长连续序列 {
 
 
         for (Integer num : set) {
-            // 最小的元素
+            // num不是最小的元素
             if (!set.contains(num - 1)) {
                 int cnt = 0;
                 while (set.contains(num)) {
@@ -60,6 +61,29 @@ public class $128_最长连续序列 {
         return res;
 
 
+    }
+
+
+    public int longestConsecutive1(int[] nums) {
+        Set<Integer> set = Arrays.stream(nums).boxed().collect(Collectors.toSet());
+
+        int res = 0;
+
+        for(int n : set) {
+            // n不是最小元素
+            if(set.contains(n - 1)) {
+                continue;
+            }
+
+            int cur = n;
+            int len = 1;
+            while(set.contains(cur + 1)) {
+                cur++;
+                len++;
+            }
+            res = Math.max(len, res);
+        }
+        return res;
     }
 
 }
