@@ -1,9 +1,6 @@
 package com.vine.alg.code.leetcode;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author 阿季
@@ -40,7 +37,7 @@ public class $139_单词拆分 {
 
     public static void main(String[] args) {
         $139_单词拆分 d = new $139_单词拆分();
-        boolean b = d.wordBreak("catsandog", Arrays.asList("cats", "dog", "sand", "and", "cat"));
+        boolean b = d.wordBreak2("aaaaaaa", Arrays.asList("aaaa","aaa"));
         System.out.println(b);
 
 
@@ -114,6 +111,45 @@ public class $139_单词拆分 {
 
 
     }
+
+
+    public boolean wordBreak2(String s, List<String> wordDict) {
+        this.s = s;
+        this.set = new HashSet<>(wordDict);
+        this.memos = new int[s.length()];
+        Arrays.fill(memos, -1);
+        return dp(0);
+    }
+    int[] memos;
+
+    String s;
+    Set<String> set ;
+    // 定义s[i...] 能被拼出返回true
+    boolean dp(int i) {
+
+        if(i == s.length()) {
+            return true;
+        }
+
+        if(memos[i] != -1) {
+            return memos[i] == 0 ? false : true;
+        }
+
+        //  遍历 s[i..] 的所有前缀
+        for(int len = 1; len + i <= s.length(); len++) {
+            if(set.contains(s.substring(i, len + i))) {
+                boolean result = dp(i + len);
+                if(result) {
+                    memos[i] = 1;
+                    return result;
+                }
+            }
+        }
+        memos[i] = 0;
+        return false;
+    }
+
+
 
 
 }

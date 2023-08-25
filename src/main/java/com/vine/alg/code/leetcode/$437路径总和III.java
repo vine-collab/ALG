@@ -48,6 +48,34 @@ public class $437路径总和III {
     }
 
 
+    public int pathSum1(TreeNode root, int targetSum) {
+        if (root == null) {
+            return 0;
+        }
+
+        int res = rootSum(root, targetSum);
+        res += pathSum(root.left, targetSum);
+        res += pathSum(root.right, targetSum);
+        return res;
+    }
+
+
+    int rootSum(TreeNode root, int targetSum) {
+        if (root == null) {
+            return 0;
+        }
+        int res = 0;
+        if(targetSum - root.val == 0) {
+            res++;
+        }
+
+        res += rootSum(root.left, targetSum - root.val);
+        res += rootSum(root.right, targetSum - root.val);
+        return res;
+
+    }
+
+
 }
 
 
