@@ -2,6 +2,8 @@ package com.vine.alg.code.leetcode;
 
 import com.vine.alg.基本数据结构构造.TreeNode;
 
+import javax.xml.stream.FactoryConfigurationError;
+
 /**
  * @author 阿季
  * @date 2022-07-05 11:18 PM
@@ -39,7 +41,6 @@ public class $114_二叉树展开为链表 {
     }
 
 
-
     public void flatten1(TreeNode root) {
 
         traverse(root);
@@ -64,5 +65,40 @@ public class $114_二叉树展开为链表 {
         traverse(root.right);
     }
 
+    // 定义将root为根的树拉开成链表
+    void flatten2(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        flatten2(root.left);
+        flatten2(root.right);
+
+        TreeNode tmp = root.right;
+        root.right = root.left;
+        root.left = null;
+
+        TreeNode p = root;
+        while(p.right != null) {
+            p = p.right;
+        }
+        p.right = tmp;
+
+
+
+    }
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+

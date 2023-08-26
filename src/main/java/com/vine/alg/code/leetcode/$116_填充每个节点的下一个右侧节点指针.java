@@ -2,6 +2,8 @@ package com.vine.alg.code.leetcode;
 
 import com.vine.alg.基本数据结构构造.Node;
 
+import java.util.LinkedList;
+
 /**
  * @author 阿季
  * @date 2022-06-03 5:45 PM
@@ -62,6 +64,56 @@ public class $116_填充每个节点的下一个右侧节点指针 {
         return root;
 
     }
+
+
+
+
+
+
+    public Node connect11(Node root) {
+        if(root == null) {
+            return root;
+        }
+        LinkedList nodes = new LinkedList();
+        nodes.add(root);
+        traverse(nodes);
+        return root;
+    }
+
+    void traverse(LinkedList<Node> nodes) {
+        if(nodes.isEmpty()) {
+            return;
+        }
+        Node p = new Node();
+        LinkedList<Node> nextNodes = new LinkedList<>();
+        for (Node node : nodes) {
+            p.next = node;
+            p = p.next;
+            if(node.left != null) {
+                nextNodes.addLast(node.left);
+            }
+            if(node.right != null){
+                nextNodes.addLast(node.right);
+            }
+        }
+        traverse(nextNodes);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
