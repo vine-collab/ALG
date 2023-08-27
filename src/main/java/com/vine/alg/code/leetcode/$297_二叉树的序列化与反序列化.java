@@ -3,8 +3,6 @@ package com.vine.alg.code.leetcode;
 import com.vine.alg.基本数据结构构造.TreeNode;
 
 import java.util.LinkedList;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 /**
  * @author 阿季

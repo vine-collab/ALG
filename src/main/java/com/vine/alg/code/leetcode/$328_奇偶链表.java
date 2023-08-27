@@ -2,9 +2,6 @@ package com.vine.alg.code.leetcode;
 
 import com.vine.alg.基本数据结构构造.ListNode;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * @author 阿季
  * @date 2023-08-26 20:53
