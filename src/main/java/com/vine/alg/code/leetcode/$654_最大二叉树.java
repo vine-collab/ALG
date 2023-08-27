@@ -1,6 +1,7 @@
 package com.vine.alg.code.leetcode;
 
 import com.vine.alg.基本数据结构构造.TreeNode;
+import org.checkerframework.checker.units.qual.K;
 
 /**
  * @author 阿季
@@ -25,17 +26,18 @@ public class $654_最大二叉树 {
         if (l > r) {
             return null;
         }
-        int max = Integer.MIN_VALUE;
-        int index = -1;
-        for (int i = l; i <= r; i++) {
+        int max = nums[l];
+        int idx = l;
+        for(int i = l + 1; i <= r; i++) {
             if(max < nums[i]) {
+                idx = i;
                 max = nums[i];
-                index = i;
             }
         }
+
         TreeNode root = new TreeNode(max);
-        root.left = bulid(nums, l, index - 1);
-        root.right = bulid(nums, index + 1, r);
+        root.left = bulid(nums, l, idx - 1);
+        root.right = bulid(nums, idx + 1, r);
         return root;
 
     }
