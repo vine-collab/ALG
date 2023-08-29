@@ -8,15 +8,15 @@ targetCompatibility = 1.8
 
 allprojects {
     repositories {
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
-        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
     }
 }
 dependencies {
-    compile 'org.projectlombok:lombok:1.18.0'
-    compile 'com.alibaba:fastjson:1.2.8'
-    compile 'org.apache.commons:commons-lang3:3.9'
-    compile 'com.google.guava:guava:30.1.1-jre'
+    implementation 'org.projectlombok:lombok:1.18.0'
+    implementation 'com.alibaba:fastjson:1.2.8'
+    implementation 'org.apache.commons:commons-lang3:3.9'
+    implementation 'com.google.guava:guava:30.1.1-jre'
     implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
 
 }
