@@ -54,6 +54,11 @@ public class Utils {
 
     }
 
+    public static void printf(Object o) {
+        System.out.println(JSON.toJSONString(o));
+    }
+
+
 }
 
 
