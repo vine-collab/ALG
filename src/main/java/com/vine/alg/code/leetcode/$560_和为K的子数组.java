@@ -55,6 +55,25 @@ public class $560_和为K的子数组 {
 
     }
 
+    public int subarraySum1(int[] nums, int k) {
+        int[] preSum = new int[nums.length + 1];
+        for(int i = 1; i <= nums.length; i++) {
+            preSum[i] = preSum[i - 1] + nums[i - 1];
+        }
+        int cnt = 0;
+        for(int i = 0; i < preSum.length; i++) {
+            for(int j = i + 1; j < preSum.length; j++) {
+                if(preSum[j] - preSum[i] == k) {
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
+
+    }
+
+
+
 }
 
 
