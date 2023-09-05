@@ -1,4 +1,4 @@
-package com.vine.concurrency.providerandconsumer;
+package com.vine.concurrency.providerandconsumer.生产者消费者.Queue缓冲区;
 
 import java.security.SecureRandom;
 import java.util.Random;
@@ -30,7 +30,8 @@ public class Provider implements Runnable {
             try {
                 Thread.sleep(r.nextInt(1000));
                 int data = this.data.incrementAndGet();
-                System.out.println("当前线程:" + Thread.currentThread().getName() + ", 获取了数据，data为:" + data + ", 进行装载到公共缓冲区中...");
+                System.out.println("当前线程:" + Thread.currentThread().getName() +
+                        ", 获取了数据，data为:" + data + ", 进行装载到公共缓冲区中...");
                 if(!this.queue.offer(data, 2, TimeUnit.SECONDS)){
                     System.out.println("提交缓冲区数据失败....");
                     //do something... 比如重新提交

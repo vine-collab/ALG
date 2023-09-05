@@ -1,4 +1,4 @@
-package com.vine.concurrency.providerandconsumer;
+package com.vine.concurrency.providerandconsumer.生产者消费者.Queue缓冲区;
 
 import java.util.concurrent.*;
 
