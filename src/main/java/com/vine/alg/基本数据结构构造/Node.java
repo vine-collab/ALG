@@ -1,5 +1,8 @@
 package com.vine.alg.基本数据结构构造;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Node {
     public int key;
     public int val;
@@ -7,6 +10,7 @@ public class Node {
     public Node right;
     public Node next;
     public Node pre;
+    public List<Node> children = new ArrayList<>();
 
     public Node() {
     }

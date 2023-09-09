@@ -40,6 +40,8 @@ public class $153_寻找旋转排序数组中的最小值 {
         $153_寻找旋转排序数组中的最小值 x = new $153_寻找旋转排序数组中的最小值();
         int min = x.findMin(new int[]{3, 1});
         System.out.println(min);
+
+
     }
 
 

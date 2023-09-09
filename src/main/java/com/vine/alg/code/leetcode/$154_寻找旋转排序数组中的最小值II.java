@@ -49,13 +49,13 @@ public class $154_寻找旋转排序数组中的最小值II {
         int left = 0, right = nums.length - 1;
         while (left <= right) {
             int mid = left + (right - left) / 2;
-            // 右侧有序
+            // 右侧有序，最小点在左边
             if (nums[mid] < nums[right]) {
-                right = mid;
+                right = mid; // mid有可能是最小值，所以取值为mid
             }
-
+            // 左侧有序，最小点在右边
             else if (nums[mid] > nums[right]) {
-                left = mid + 1;
+                left = mid + 1; // mid不可能是最小值
             }
             // 重复元素，线性查找
             else {
