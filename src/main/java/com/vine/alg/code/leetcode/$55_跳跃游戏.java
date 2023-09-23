@@ -40,12 +40,12 @@ public class $55_跳跃游戏 {
         int farthest = 0;
 
         for (int i = 0; i < nums.length - 1; i++) {
-            farthest = Integer.max(farthest, nums[i] + i);
+            farthest = Math.max(farthest, nums[i] + i);
             if (farthest <= i) {
                 return false;
             }
         }
-        return true;
+        return farthest >= nums.length - 1;
 
     }
 
