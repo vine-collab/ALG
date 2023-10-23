@@ -53,14 +53,13 @@ public class $1640_能否连接形成数组 {
             if (ints == null) {
                 return false;
             }
-            for (int j = 1; j < ints.length; j++) {
+            for (int j = 0; j < ints.length; j++) {
                 if (ints[j] != arr[i]) {
-                    break;
+                    return false;
                 }
-                j++;
                 i++;
             }
-            i++;
+//            i++;
         }
 
         return i == arr.length;
